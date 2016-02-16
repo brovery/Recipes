@@ -18,6 +18,11 @@
                     templateUrl: "templates/home.html",
                     controller: "homeController as hc"
                 })
+                .state("newRecipe", {
+                    url: "/newRecipe",
+                    templateUrl: "templates/newRecipe.html",
+                    controller: "newCtrl as nc"
+                })
                 .state("about", {
                     url: "/about",
                     templateUrl: "templates/about.html"
