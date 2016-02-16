@@ -2,51 +2,50 @@
 
 <div>
     Name:
-    <input type="text" style="width: 300px" placeholder="Mama's Healthy Meatloaf"/>
-
+    <input type="text" style="width: 300px" placeholder="Mama's Healthy Meatloaf" ng-model="nc.name"/>
 </div>
 
 Ingredients:
+
 <div>
-<textarea  name="ingredients" id="ing" cols="30" rows="10"></textarea>
+    <button class="btn btn-primary" ng-click="nc.ingredients.push({name:'', qty:''})">Add Ingredient</button>
+
+    <div ng-repeat="ingredient in nc.ingredients">
+        <input type="text" placeholder="Ingredient Name" ng-model="ingredient.name"/>
+        <input type="text" placeholder="Ingredient Quantity" ng-model="ingredient.qty"/>
+    </div>
+
 </div>
 
 Instructions:
 <div>
-<textarea  name="instructions" id="ins" cols="30" rows="10"></textarea>
+<textarea  name="instructions" id="ins" cols="30" rows="10" ng-model="nc.instructions"></textarea>
 </div>
 
 <div>
     Time to Prep:
-    <input type="text" placeholder="minutes"/>
+    <input type="text" placeholder="minutes" ng-model="nc.prepTime"/>
 </div>
 
 <div>
     Time to Cook:
-    <input type="text" placeholder="minutes"/>
+    <input type="text" placeholder="minutes" ng-model="nc.cookTime"/>
 </div>
 
 <div>
-    Recipe Category:
-    <span class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li>Appetizer</li>
-            <li>Entree</li>
-            <li>Dessert</li>
-        </ul>
-    </span>
+    <select name="category" id="cat" ng-model="nc.category">
+        <option value="Appetizer">Appetizer</option>
+        <option value="Entree">Entree</option>
+        <option value="Dessert">Dessert</option>
+    </select>
+
 </div>
 
-<div>
-    Public:
-    <input type="radio"/>
+<div class="radio">
+    <label><input type="radio" name="optradio" value="false" ng-model="nc.privacy">Public</label>
+</div>
+<div class="radio">
+    <label><input type="radio" name="optradio" value="true" ng-model="nc.privacy" >Private</label>
 </div>
 
-<div>
-    Private:
-    <input type="radio"/>
-</div>
-
-<button type="button" class="btn btn-primary">Submit</button>
+<button type="button" class="btn btn-primary" ng-click="nc.createRecipe()">Submit</button>

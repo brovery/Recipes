@@ -6,7 +6,8 @@
         "navController",
         "homeController",
         "homeService",
-        "recipeService"
+        "recipeService",
+        "newCtrl"
     ])
 
     .config(["$stateProvider", "$urlRouterProvider",
