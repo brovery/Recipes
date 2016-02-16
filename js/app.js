@@ -8,7 +8,8 @@
         "homeService",
         "recipeService",
         "firebase",
-        "recipeController"
+        "recipeController",
+        "newCtrl"
     ])
 
     .config(["$stateProvider", "$urlRouterProvider",
