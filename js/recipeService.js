@@ -4,14 +4,18 @@
     angular.module('recipeService', [])
         .service('recipeService', recipeService);
 
-    recipeService.$inject = [];
+    recipeService.$inject = ['$firebaseArray'];
 
-    function recipeService() {
+    function recipeService($firebaseArray) {
+        var url = 'https://recipe-app.firebaseio.com';
+        var reciperef = new Firebase(url + "/Recipes");
 
         // list everything
         var rs = this;
+        rs.fireRecipes = $firebaseArray(reciperef);
+        rs.addRecipe = addRecipe;
         rs.recipes = {
-            name: 'Momma\'s Healthy Meathloaf',
+            name: "Momma's Healthy Meatloaf",
             image: 'img/meatloaf1.jpg',
             prepTime: 15,
             cookTime: 45,
@@ -65,15 +69,19 @@
                     qty: '1/4 cup'
                 }
             ],
-            instructions: {
-                step1: 'Preheat oven to 400 degrees F (200 degrees C). Spray a 9x5-inch loaf pan with cooking spray.',
-                step2: 'Heat olive oil in a skillet over medium heat; cook and stir green bell pepper and onion in the hot oil until onion is transparent and bell pepper is softened, 5 to 10 minutes. Add garlic and cook until fragrant, 1 to 2 minutes.',
-                step3: 'Combine ground beef, bread crumbs, eggs, carrot, zucchini, salt, pepper, and bell pepper mixture in a large bowl; mix well using your hands. Press meat mixture into the prepared loaf pan.',
-                step4: 'Bake in the preheated oven until no longer pink in the center, 35 to 40 minutes. An instant-read thermometer inserted into the center should read at least 160 degrees F (70 degrees C). Spread ketchup on the top of the meatloaf and continue baking until bubbling, about 5 minutes more.'
-            },
+            instructions: 'Preheat oven to 400 degrees F (200 degrees C). Spray a 9x5-inch loaf pan with cooking spray.' +
+                            'Heat olive oil in a skillet over medium heat; cook and stir green bell pepper and onion in the hot oil until onion is transparent and bell pepper is softened, 5 to 10 minutes. Add garlic and cook until fragrant, 1 to 2 minutes.' +
+                            'Combine ground beef, bread crumbs, eggs, carrot, zucchini, salt, pepper, and bell pepper mixture in a large bowl; mix well using your hands. Press meat mixture into the prepared loaf pan.' +
+                            'Bake in the preheated oven until no longer pink in the center, 35 to 40 minutes. An instant-read thermometer inserted into the center should read at least 160 degrees F (70 degrees C). Spread ketchup on the top of the meatloaf and continue baking until bubbling, about 5 minutes more.',
             category: 'entre',
             private: false
         };
+
+        function addRecipe(recipe) {
+            rs.fireRecipes.$add(recipe);
+
+        }
+
 
 
 
