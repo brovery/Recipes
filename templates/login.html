@@ -1,0 +1,41 @@
+<div ng-controller="MainController as vm">
+
+    <button ng-click="vm.facebookLogin()">Log in with Facebook</button>
+    <button ng-click="vm.deleteFacebookData()">Delete Facebook data</button>
+    <a href='https://www.facebook.com/'>Go to Facebook</a>
+
+    <button ng-click="vm.googleLogin()">Log in with Google</button>
+    <button ng-click="vm.deletegoogleData()">Delete Google data</button>
+    <a href='https://www.google.com/'>Go to Google</a>
+
+    <button ng-click="vm.githubLogin()">Log in with Github</button>
+    <button ng-click="vm.deletegithubData()">Delete Github data</button>
+    <a href='https://www.github.com/'>Go to Github</a>
+
+    <br />
+    <br />
+    <div>{{ vm.message }}</div>
+    <br />
+
+    <!-- click profile pic to display raw data from facebook -->
+    <div>{{ vm.fbData.facebook.displayName }}</div>
+    <div ng-click="vm.showData=!vm.showData">
+        <img ng-show="vm.fbData.facebook.profileImageURL" ng-src="{{ vm.fbData.facebook.profileImageURL }}">
+    </div>
+    <pre ng-show="vm.showData" ng-bind="vm.fbData.facebook | json"></pre>
+
+    <!-- click profile pic to display raw data from google -->
+    <div>{{ vm.fbData.google.displayName }}</div>
+    <div ng-click="vm.showData=!vm.showData">
+        <img ng-show="vm.fbData.google.profileImageURL" ng-src="{{ vm.fbData.google.profileImageURL }}">
+    </div>
+    <pre ng-show="vm.showData" ng-bind="vm.fbData.google | json"></pre>
+
+    <!-- click profile pic to display raw data from github -->
+    <div>{{ vm.fbData.github.displayName }}</div>
+    <div ng-click="vm.showData=!vm.showData">
+        <img ng-show="vm.fbData.github.profileImageURL" ng-src="{{ vm.fbData.github.profileImageURL }}">
+    </div>
+    <pre ng-show="vm.showData" ng-bind="vm.fbData.github | json"></pre>
+
+</div>
