@@ -1,0 +1,26 @@
+<div class="alert alert-info">
+    <h3 ng-bind="rc.recipes.name"></h3>
+    <div class="col-sm-6">
+        <img width="100%" src="img/meatloaf1.jpg" alt="">
+    </div>
+    <div class="col-sm-6">
+        Prep Time: <span ng-bind="rc.recipes.prepTime"></span><br>
+        Cook Time: <span ng-bind="rc.recipes.cookTime"></span>
+    </div>
+    <div class="col-sm-12">
+        <h3>Ingredients</h3>
+        <ul>
+            <li ng-repeat="ingredient in rc.recipes.ingredients">
+                <span ng-bind="ingredient.ingredient"></span>
+                -
+                <span ng-bind="ingredient.qty"></span>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-12">
+        <h3>Instructions</h3>
+        <span ng-bind="rc.recipes.instructions"></span>
+    </div>
+
+
+</div>

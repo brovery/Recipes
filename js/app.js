@@ -6,7 +6,9 @@
         "navController",
         "homeController",
         "homeService",
-        "recipeService"
+        "recipeService",
+        "firebase",
+        "recipeController"
     ])
 
     .config(["$stateProvider", "$urlRouterProvider",
@@ -27,6 +29,11 @@
                 .state("about", {
                     url: "/about",
                     templateUrl: "templates/about.html"
+                })
+                .state("recipe", {
+                    url: "/recipe",
+                    templateUrl: "templates/recipe.html",
+                    controller: "recipeController as rc"
                 });
 
             // if none of the above states are matched, use this as the fallback
