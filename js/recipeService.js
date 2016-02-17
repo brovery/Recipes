@@ -89,7 +89,7 @@
         //};
 
         function addRecipe(recipe) {
-            rs.fireRecipes.$add(recipe);
+            rs.recipes.$add(recipe);
 
         }
 

@@ -33,7 +33,7 @@
                     templateUrl: "templates/about.html"
                 })
                 .state("recipe", {
-                    url: "/:recipe.id",
+                    url: "/:id",
                     templateUrl: "templates/recipe.html",
                     controller: "recipeController as rc"
                 })
