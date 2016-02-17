@@ -16,8 +16,12 @@
             <ul class="nav navbar-nav">
                 <li ng-class="{ active: nav.isActive('/home')}">
                     <a ui-sref="home" data-toggle="collapse" data-target=".navbar-collapse.in">Home</a></li>
+                <li ng-class="{ active: nav.isActive('/newRecipe')}">
+                    <a ui-sref="newRecipe" data-toggle="collapse" data-target=".navbar-collapse.in">Add Recipe</a></li>
                 <li ng-class="{ active: nav.isActive('/about')}">
                     <a ui-sref="about" data-toggle="collapse" data-target=".navbar-collapse.in">About</a></li>
+                <li ng-class="{ active: nav.isActive('/recipe')}">
+                    <a ui-sref="recipe" data-toggle="collapse" data-target=".navbar-collapse.in">Recipe</a></li>
             </ul>
             <!--<ul class="nav navbar-nav navbar-right">-->
             <!--<li><a ui-sref="login" data-toggle="collapse" data-target=".navbar-collapse">Login</a></li>-->
