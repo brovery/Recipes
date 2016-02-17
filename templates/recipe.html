@@ -19,7 +19,12 @@
     </div>
     <div class="col-sm-12">
         <h3>Instructions</h3>
-        <span ng-bind="rc.recipes.instructions"></span>
+        <ol>
+            <li ng-repeat="instruction in rc.recipes.instructions">
+                <span ng-bind="instruction.instruction"></span>
+            </li>
+        </ol>
+
     </div>
 
 
