@@ -5,8 +5,6 @@
     <input type="text" style="width: 300px" placeholder="Mama's Healthy Meatloaf" ng-model="nc.name"/>
 </div>
 
-Ingredients:
-
 <div>
     <button class="btn btn-primary" ng-click="nc.ingredients.push({name:'', qty:''})">Add Ingredient</button>
 
@@ -17,11 +15,15 @@ Ingredients:
 
 </div>
 
-Instructions:
 <div>
-<textarea  name="instructions" id="ins" cols="30" rows="10" ng-model="nc.instructions"></textarea>
-</div>
+    <button class="btn btn-primary" ng-click="nc.instructions.push({name:'', step:''})">Add Instructions</button>
 
+    <div ng-repeat="(rowIndex, instruction) in nc.instructions">
+        Step {{rowIndex + 1}}:
+        <input style="width: 300px" type="text" placeholder="Instruction Name" ng-model="instruction.name"/>
+    </div>
+
+</div>
 <div>
     Time to Prep:
     <input type="text" placeholder="minutes" ng-model="nc.prepTime"/>
@@ -46,6 +48,35 @@ Instructions:
 </div>
 <div class="radio">
     <label><input type="radio" name="optradio" value="true" ng-model="nc.privacy" >Private</label>
+</div>
+
+<div>
+
+    <!-- upload box -->
+    <div ngf-drop ngf-select
+         class="drop-box ng-valid ng-dirty"
+         ng-model="files"
+         ng-model-rejected="rejFiles"
+         ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+         ngf-multiple="true"
+         ngf-allow-dir="true"
+         ngf-accept="'image/*'"
+         ngf-change="nc.upload(files, $event, rejFiles, anotherCustomParam)"
+         ngf-drop-available="dropAvailable">
+        <div ngf-no-file-drop class="ng-hide">File Drop not available</div>
+        <div ng-show="dropAvailable" class="drop-here">
+            Drag files here to upload or <a href="#" class="btn btn-primary">browse for a file</a>
+        </div>
+    </div>
+    <br />
+
+    <!-- display file info -->
+    <div ng-repeat="file in files" class="file upload-file clearfix">
+        <div class="file-title {{ file.type }}">{{ file.name }}</div>
+        <span class="file-size">({{ file.size / 1000 | number: 0 }}kb)</span>
+        <img style="width: 100px" src="{{file.$ngfBlobUrl}}"/>
+    </div>
+
 </div>
 
 <button type="button" class="btn btn-primary" ng-click="nc.createRecipe()">Submit</button>

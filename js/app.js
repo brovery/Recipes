@@ -9,7 +9,9 @@
         "recipeService",
         "firebase",
         "recipeController",
-        "newCtrl"
+        "newCtrl",
+        "ngFileUpload"
+
     ])
 
     .config(["$stateProvider", "$urlRouterProvider",
