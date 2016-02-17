@@ -9,8 +9,8 @@
         "recipeService",
         "firebase",
         "recipeController",
-        "newCtrl",
-        "loginController"
+        "newCtrl"
+
     ])
 
     .config(["$stateProvider", "$urlRouterProvider",
@@ -33,7 +33,7 @@
                     templateUrl: "templates/about.html"
                 })
                 .state("recipe", {
-                    url: "/recipe",
+                    url: "/:recipe.id",
                     templateUrl: "templates/recipe.html",
                     controller: "recipeController as rc"
                 })
