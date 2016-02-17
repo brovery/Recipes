@@ -9,7 +9,8 @@
         "recipeService",
         "firebase",
         "recipeController",
-        "newCtrl"
+        "newCtrl",
+        "loginController"
     ])
 
     .config(["$stateProvider", "$urlRouterProvider",
@@ -35,6 +36,11 @@
                     url: "/recipe",
                     templateUrl: "templates/recipe.html",
                     controller: "recipeController as rc"
+                })
+                .state("login", {
+                    url: "/login",
+                    templateUrl: "templates/login.html",
+                    controller: "loginController as lc"
                 });
 
             // if none of the above states are matched, use this as the fallback
