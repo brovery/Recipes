@@ -1,17 +1,19 @@
-<div ng-controller="loginController as lc">
+<div ng-app="app">
+    <div ng-controller="loginController as lc">
 
-    <button ng-click="vm.facebookLogin()">Log in with Facebook</button>
-    <button ng-click="vm.deleteFacebookData()">Delete data</button>
-    <a href='https://www.facebook.com/'>Go to Facebook</a><br />
-    <br />
-    <div>{{ vm.message }}</div>
-    <br />
+        <button ng-click="lc.facebookLogin()">Log in with Facebook</button>
+        <button ng-click="lc.deleteFacebookData()">Delete data</button>
+        <a href='https://www.facebook.com/'>Go to Facebook</a><br/>
+        <br/>
+        <div>{{ lc.message }}</div>
+        <br/>
 
-    <!-- click profile pic to display raw data from facebook -->
-    <div>{{ vm.fbData.facebook.displayName }}</div>
-    <div ng-click="vm.showData=!vm.showData">
-        <img ng-show="vm.fbData.facebook.profileImageURL" ng-src="{{ vm.fbData.facebook.profileImageURL }}">
+        <!-- click profile pic to display raw data from facebook -->
+        <div>{{ lc.fbData.facebook.displayName }}</div>
+        <div ng-click="lc.showData=!lc.showData">
+            <img ng-show="lc.fbData.facebook.profileImageURL" ng-src="{{ lc.fbData.facebook.profileImageURL }}">
+        </div>
+        <pre ng-show="lc.showData" ng-bind="lc.fbData.facebook | json"></pre>
+
     </div>
-    <pre ng-show="vm.showData" ng-bind="vm.fbData.facebook | json"></pre>
-
 </div>

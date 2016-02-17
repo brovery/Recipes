@@ -19,12 +19,12 @@ function loginController($timeout, $localStorage) {
     lc.facebookLogin = facebookLogin;
     lc.deleteFacebookData = deleteFacebookData;
 
-    lc.fbData = $localStorage['firebase:session::blistering-inferno-875'];
+    lc.fbData = $localStorage['firebase:session::recipe-app.firebaseio.com'];
     // if facebook data is found in local storage, use it
     lc.message = lc.fbData && lc.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
 
     // IMPORTANT: change to match the URL of your Firebase.
-    var url = 'https://blistering-inferno-875.firebaseio.com';
+    var url = 'https://recipe-app.firebaseio.com';
 
     // use Firebase library to login to facebook
     function facebookLogin() {
@@ -36,7 +36,7 @@ function loginController($timeout, $localStorage) {
             } else {
                 console.log('Logged in to Facebook');
                 lc.message = 'Logged in to Facebook.';
-                $timeout(function() { // invokes $scope.$apply()
+                $timeout(function () { // invokes $scope.$apply()
                     lc.fbData = authData;
                 });
             }
@@ -48,8 +48,9 @@ function loginController($timeout, $localStorage) {
     function deleteFacebookData() {
         $localStorage.$reset();
         lc.fbData = {};
-        lc.message = 'Facebook data deleted.'
+        lc.message = 'Facebook data deleted.';
     }
+
     // bug alert: this delete function sometimes does NOT reset the local storage,
     // so a page refresh finds facebook data in localstorage.
 }
