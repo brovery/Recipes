@@ -4,29 +4,18 @@
     angular.module('homeController', [])
         .controller('homeController', homeController);
 
-    homeController.$inject = ['homeService', 'recipeService'];
+    homeController.$inject = ['recipeService'];
 
-    function homeController(homeService, recipeService) {
+    function homeController(recipeService) {
 
         // list everything
         var hc = this;
-        hc.sometext = homeService.getText();
-        hc.clearText = clearText;
-        hc.updateText = updateText;
-        hc.initializeFirebase = initializeFirebase;
+        hc.recipes = recipeService.recipes;
 
         // define functions
-        function clearText() {
-            hc.sometext = homeService.clearText();
-        }
-        function updateText() {
-            homeService.setText(hc.sometext);
-        }
 
-        function initializeFirebase() {
-            console.log("controller - add recipe");
-            recipeService.initializeFirebase();
-        }
+
+
     }
 
 }());
