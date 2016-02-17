@@ -1,14 +1,11 @@
 /**
  * Created by danielgraff1 on 2/17/16.
  */
-var app = angular.module('app', ['ngStorage']);
+(function(){
+    'use strict';
 
-app.config(['$localStorageProvider',
-    function ($localStorageProvider) {
-        $localStorageProvider.setKeyPrefix('');
-    }]);
-
-app.controller('loginController', loginController);
+    angular.module('loginController', [])
+        .controller('loginController', loginController);
 
 loginController.$inject = ['$timeout', '$localStorage'];
 
@@ -50,7 +47,8 @@ function loginController($timeout, $localStorage) {
         lc.fbData = {};
         lc.message = 'Facebook data deleted.';
     }
+}
 
     // bug alert: this delete function sometimes does NOT reset the local storage,
     // so a page refresh finds facebook data in localstorage.
-}
+}());
