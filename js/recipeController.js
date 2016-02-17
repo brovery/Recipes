@@ -11,6 +11,11 @@
         // list everything
         var rc = this;
         rc.recipes = recipeService.recipes;
+        rc.initRecipe = initRecipe;
+
+        function initRecipe() {
+            recipeService.initRecipe();
+        }
 
 
         // define functions
