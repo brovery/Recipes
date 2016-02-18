@@ -20,11 +20,26 @@
                     <a ui-sref="newRecipe" data-toggle="collapse" data-target=".navbar-collapse.in">Add Recipe</a></li>
                 <li ng-class="{ active: nav.isActive('/about')}">
                     <a ui-sref="about" data-toggle="collapse" data-target=".navbar-collapse.in">About</a></li>
+                <!--<li ng-class="{ active: nav.isActive('/login')}">-->
+                    <!--<a ui-sref="login" data-toggle="collapse" data-target=".navbar-collapse.in">Login</a></li>-->
             </ul>
+            <div class="col-sm-6">
+                <div id="imaginary_container">
+                    <div class="input-group stylish-input-group">
+                        <input type="text" class="form-control" placeholder="Search" ng-model="nav.searchText">
+                    <span class="input-group-addon">
+                        <button ng-click="nav.search()">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                    </div>
+                </div>
+            </div>
             <ul class="nav navbar-nav navbar-right">
-            <li ng-class="{ active: nav.isActive('/login')}">
-                <a ui-sref="login" data-toggle="collapse" data-target=".navbar-collapse.in">Login</a></li>
+                <li ng-class="{ active: nav.isActive('/login')}"><a ui-sref="login" data-toggle="collapse" data-target=".navbar-collapse.in">Login</a></li>
             </ul>
+
+
         </div>
     </div>
 </nav>

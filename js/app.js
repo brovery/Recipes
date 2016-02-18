@@ -10,6 +10,7 @@
             "firebase",
             "recipeController",
             "newCtrl",
+            "ngFileUpload",
             "loginController"
 
         ])
@@ -41,7 +42,12 @@
                     .state("recipe", {
                         url: "/:id",
                         templateUrl: "templates/recipe.html",
-                        controller: "recipeController as rc"
+                        controller: "recipeController as rc",
+                        resolve: {
+                            recipe: function ($stateParams, recipeService) {
+                                return recipeService.recipes[$stateParams.id];
+                            }
+                        }
                     });
 
                 // if none of the above states are matched, use this as the fallback
