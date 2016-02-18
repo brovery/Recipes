@@ -14,6 +14,7 @@
         var rs = this;
         rs.recipes = $firebaseArray(reciperef);
         rs.addRecipe = addRecipe;
+        rs.initRecipe = initRecipe;
         //rs.recipes = {
         //    name: "Momma's Healthy Meatloaf",
         //    image: 'img/meatloaf1.jpg',
@@ -61,12 +62,12 @@
         //            qty: '3/4 cup'
         //        },
         //        {
-        //            ingredient: 'salt and ground black pepper to taste',
-        //            qty: ''
+        //            ingredient: 'salt and ground black pepper',
+        //            qty: 'to taste'
         //        },
         //        {
-        //            ingredient: 'ketchup, or to taste',
-        //            qty: '1/4 cup'
+        //            ingredient: 'ketchup',
+        //            qty: '1/4 cup, or to taste'
         //        }
         //    ],
         //    instructions: [
@@ -88,11 +89,14 @@
         //};
 
         function addRecipe(recipe) {
-            rs.fireRecipes.$add(recipe);
+            rs.recipes.$add(recipe);
 
         }
 
-
+        function initRecipe() {
+            //rs.fireRecipes.$add(rs.recipes);
+            console.log(rs.recipes);
+        }
 
 
 
