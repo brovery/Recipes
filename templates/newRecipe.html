@@ -5,8 +5,6 @@
     <input type="text" style="width: 300px" placeholder="Mama's Healthy Meatloaf" ng-model="nc.name"/>
 </div>
 
-Ingredients:
-
 <div>
     <button class="btn btn-primary" ng-click="nc.ingredients.push({name:'', qty:''})">Add Ingredient</button>
 
@@ -17,11 +15,15 @@ Ingredients:
 
 </div>
 
-Instructions:
 <div>
-<textarea  name="instructions" id="ins" cols="30" rows="10" ng-model="nc.instructions"></textarea>
-</div>
+    <button class="btn btn-primary" ng-click="nc.instructions.push({name:'', step:''})">Add Instructions</button>
 
+    <div ng-repeat="(rowIndex, instruction) in nc.instructions">
+        Step {{rowIndex + 1}}:
+        <input style="width: 300px" type="text" placeholder="Instruction Name" ng-model="instruction.name"/>
+    </div>
+
+</div>
 <div>
     Time to Prep:
     <input type="text" placeholder="minutes" ng-model="nc.prepTime"/>
@@ -48,4 +50,13 @@ Instructions:
     <label><input type="radio" name="optradio" value="true" ng-model="nc.privacy" >Private</label>
 </div>
 
+<h4>Upload on file select</h4>
+<button type="file" ngf-select="nc.addPost($file)"
+        accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+    Select File</button>
+
 <button type="button" class="btn btn-primary" ng-click="nc.createRecipe()">Submit</button>
+
+<div ng-repeat="image in nc.fireImage">
+    <img ngf-src="image.images"/>
+</div>

@@ -10,6 +10,7 @@
         "firebase",
         "recipeController",
         "newCtrl",
+        "ngFileUpload",
         "loginController"
 
     ])
