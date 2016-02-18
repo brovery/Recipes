@@ -10,7 +10,8 @@
         "firebase",
         "recipeController",
         "newCtrl",
-        "ngFileUpload"
+        "ngFileUpload",
+        "loginController"
 
     ])
 
@@ -37,11 +38,16 @@
                     url: "/login",
                     templateUrl: "templates/login.html",
                     controller: "loginController as lc"
-                })
+                })// recipe needs to be at the end to prevent weirdness.
                 .state("recipe", {
                     url: "/:id",
                     templateUrl: "templates/recipe.html",
-                    controller: "recipeController as rc"
+                    controller: "recipeController as rc",
+                    resolve: {
+                        recipe: function($stateParams, recipeService) {
+                            return recipeService.recipes[$stateParams.id];
+                        }
+                    }
                 });
 
             // if none of the above states are matched, use this as the fallback

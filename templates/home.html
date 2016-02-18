@@ -1,32 +1,22 @@
-<div class="alert alert-success">
+<div class="alert alert-success row">
     <br>
     <!--Search bar http://bootsnipp.com/snippets/featured/stylish-input-using-icon-font-->
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                <div id="imaginary_container">
-                    <div class="input-group stylish-input-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                    <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
 
-    <!--image grid http://blackrockdigital.github.io/startbootstrap-thumbnail-gallery/-->
-    <!--image from http://www.nyise.org/16Photoblog/Schermerhorn/Cooking/Lets-get-cooking-300x300.png-->
-    <div ng-repeat="recipe in hc.recipes">
-        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <span ng-bind="recipe.name"></span>
-            <a class="thumbnail" href="#/{{$index}}">
-                <img class="img-responsive" ng-src={{recipe.image}} alt="Lets get cooking">
-            </a>
+        </div>
+
+        <br>
+
+        <!--image grid http://blackrockdigital.github.io/startbootstrap-thumbnail-gallery/-->
+        <!--image from http://www.nyise.org/16Photoblog/Schermerhorn/Cooking/Lets-get-cooking-300x300.png-->
+        <div ng-repeat="recipe in hc.recipes">
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <span ng-bind="recipe.name"></span>
+                <a class="thumbnail" href="#/{{$index}}">
+                    <img class="img-responsive" ng-src={{recipe.image}} alt="Lets get cooking">
+                </a>
+            </div>
         </div>
     </div>
 </div>

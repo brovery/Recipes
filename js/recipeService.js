@@ -15,7 +15,7 @@
         rs.recipes = $firebaseArray(reciperef);
         rs.addRecipe = addRecipe;
         rs.initRecipe = initRecipe;
-        //rs.recipes = {
+        //rs.newRecipes = {
         //    name: "Momma's Healthy Meatloaf",
         //    image: 'img/meatloaf1.jpg',
         //    prepTime: 15,
@@ -94,7 +94,7 @@
         }
 
         function initRecipe() {
-            //rs.fireRecipes.$add(rs.recipes);
+            //rs.recipes.$add(rs.newRecipes);
             console.log(rs.recipes);
         }
 
