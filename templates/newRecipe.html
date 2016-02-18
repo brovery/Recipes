@@ -51,12 +51,11 @@
 </div>
 
 <h4>Upload on file select</h4>
-<button type="file" ngf-select="nc.addPost($file)"
+<button type="file" ngf-select="nc.addPost($file)" ng-model="nc.file"
         accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
     Select File</button>
 
 <button type="button" class="btn btn-primary" ng-click="nc.createRecipe()">Submit</button>
 
-<div ng-repeat="image in nc.fireImage">
-    <img ngf-src="image.images"/>
-</div>
+<img ngf-src="nc.file"/>
+

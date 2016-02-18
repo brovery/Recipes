@@ -4,9 +4,9 @@
     angular.module('newCtrl', [])
         .controller('newCtrl', newCtrl);
 
-    newCtrl.$inject = ['recipeService', '$firebaseArray', '$firebaseObject', 'Upload', '$timeout'];
+    newCtrl.$inject = ['$firebaseArray', 'Upload'];
 
-    function newCtrl(recipeService, $firebaseArray, $firebaseObject, Upload, $timeout) {
+    function newCtrl($firebaseArray, Upload) {
 
         var url = 'https://geo-recipes.firebaseio.com/';
         var reciperef = new Firebase(url + "/Recipes");
@@ -26,6 +26,7 @@
             this.category = '';
             this.private = false;
         };
+        nc.image = "";
         nc.files = "";
         nc.name = '';
         nc.ingredients = [];
@@ -33,6 +34,7 @@
         nc.prepTime = "";
         nc.cookTime = "";
         nc.category = "";
+
         nc.privacy = false;
         nc.createRecipe = createRecipe;
 
@@ -51,7 +53,7 @@
                 newRecipe.ingredients.push({ingredient: nc.ingredients[i].name, qty: nc.ingredients[i].qty});
             }
             for (i = 0; i < nc.instructions.length; i++) {
-                newRecipe.instructions.push({instructions: nc.instructions[i].name});
+                newRecipe.instructions.push({instruction: nc.instructions[i].name});
             }
             console.log(newRecipe);
             addRecipe(newRecipe);
