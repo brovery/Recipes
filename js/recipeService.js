@@ -7,7 +7,7 @@
     recipeService.$inject = ['$firebaseArray'];
 
     function recipeService($firebaseArray) {
-        var url = 'https://recipe-app.firebaseio.com';
+        var url = 'https://geo-recipes.firebaseio.com/';
         var reciperef = new Firebase(url + "/Recipes");
 
         // list everything
