@@ -1,9 +1,5 @@
-<br>
-
-<div class="alert alert-info row">
-    <div class="col-sm-12">
-        <h3 ng-bind="rc.recipe.name"></h3>
-    </div>
+<div class="alert alert-info">
+    <h3 ng-bind="rc.recipes.name"></h3>
     <div class="col-sm-6">
         <img width="100%" ng-src={{rc.recipe.image}} alt="">
     </div>
@@ -30,4 +26,5 @@
         </ol>
     </div>
 
+    <button ng-click="rc.initRecipe()">Add Recipe</button>
 </div>
