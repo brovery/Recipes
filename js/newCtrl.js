@@ -6,16 +6,16 @@
 
     newCtrl.$inject = ['recipeService', '$firebaseArray', '$firebaseObject', 'Upload', '$timeout'];
 
-    function newCtrl(recipeService, $firebaseArray, $firebaseObject,  Upload, $timeout) {
+    function newCtrl(recipeService, $firebaseArray, $firebaseObject, Upload, $timeout) {
 
-        var url = 'https://intense-fire-2508.firebaseio.com/';
+        var url = 'https://geo-recipes.firebaseio.com/';
         var reciperef = new Firebase(url + "/Recipes");
         var imageref = new Firebase(url + "/images");
 
         // list everything
         var nc = this;
         nc.fireRecipes = $firebaseArray(reciperef);
-        nc.fireImage = $firebaseObject(imageref);
+        nc.fireImage = $firebaseArray(imageref);
         var recipe = function () {
             this.name = "";
             this.image = "";
@@ -63,62 +63,23 @@
 
         }
 
+        nc.addPost = function (files) {
+            var fb = imageref;
+            Upload.base64DataUrl(files).then(function (base64Urls) {
+                fb.push({
+                    images: base64Urls
 
-        nc.loading = undefined;
-        nc.upload = upload;
+                }, function (error) {
+                    if (error) {
+                        console.log("Error:", error);
+                    } else {
+                        console.log("Post set successfully!");
+                    }
 
-        function upload(files, event, rejectedFiles, anotherCustomParam) {
-
-            for (var r in rejectedFiles) {
-                console.log(rejectedFiles[r]);
-            }
-            nc.loading = true;
-
-            if (files) {
-
-                files.upload = Upload.upload({
-                    url: nc.fireImage,
-                    data: files
                 });
+            });
+        };
 
-                files.upload.then(function (response) {
-                    $timeout(function () {
-                        files.result = response.data;
-                    });
-                }, function (response) {
-                    if (response.status > 0)
-                        $scope.errorMsg = response.status + ': ' + response.data;
-                }, function (evt) {
-                    files.progress = Math.min(100, parseInt(100.0 *
-                        evt.loaded / evt.total));
-                });
 
-               /* if (files && files.length) {
-                console.log('In');
-                for (var i = 0; i < files.length; i++) {
-                    (function (index) {
-                        var file = files[i];
-                        nc.upload[index] = Upload.upload({
-                            url: nc.fireImage, // webapi url
-                            method: 'POST',
-                            data: {file: file}
-                        }).progress(function (evt) {
-                            // set upload percentage
-                            file.progress = parseInt(100.0 * evt.loaded / evt.total);
-                        }).success(function (data, status, headers, config) {
-                            // file is uploaded successfully
-                            file.complete = true;
-                        }).error(function (data, status, headers, config) {
-                            // file failed to upload
-                            file.error = true;
-                            console.log(data);
-                            console.log(status);
-                        });
-                    })(i);
-                }*/
-
-            }
-        }
     }
-
 }());
