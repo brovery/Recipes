@@ -1,55 +1,71 @@
 /**
  * Created by danielgraff1 on 2/17/16.
  */
-var app = angular.module('app', ['ngStorage']);
+(function(){
+    'use strict';
 
-app.config(['$localStorageProvider',
-    function ($localStorageProvider) {
-        $localStorageProvider.setKeyPrefix('');
-    }]);
+    angular.module('loginController', [])
+        .controller('loginController', loginController);
 
-app.controller('loginController', loginController);
+loginController.$inject = ['$timeout'];
 
-loginController.$inject = ['$timeout', '$localStorage'];
-
-function loginController($timeout, $localStorage) {
+function loginController($timeout) {
 
     // controller data and functions
     var lc = this;
-    lc.facebookLogin = facebookLogin;
-    lc.deleteFacebookData = deleteFacebookData;
+    lc.email = "";
+    lc.password = "";
+    lc.googleLogin = googleLogin;
+    lc.deleteGoogleData = deleteGoogleData;
+    lc.nativeLogin = nativeLogin;
 
-    lc.fbData = $localStorage['firebase:session::blistering-inferno-875'];
-    // if facebook data is found in local storage, use it
-    lc.message = lc.fbData && lc.fbData.facebook ? "Logged in to Facebook." : "No Facebook data found.";
+    lc.gData = 'firebase:session::recipe-app.firebaseio.com';
+    // if google data is found in local storage, use it
+    lc.message = lc.gData && lc.gData.google ? "Logged in to Google." : "No Google data found.";
 
     // IMPORTANT: change to match the URL of your Firebase.
-    var url = 'https://blistering-inferno-875.firebaseio.com';
+    var url = 'https://recipe-app.firebaseio.com';
 
-    // use Firebase library to login to facebook
-    function facebookLogin() {
+    // use Firebase library to login to google
+    function googleLogin() {
         var ref = new Firebase(url);
-        ref.authWithOAuthPopup('facebook', function (error, authData) {
+        ref.authWithOAuthPopup('google', function (error, authData) {
             if (error) {
-                console.log('Log in to Facebook Failed', error);
-                lc.message = 'Log in to Facebook Failed. ' + error;
+                console.log('Log in to Google Failed', error);
+                lc.message = 'Log in to Google Failed. ' + error;
             } else {
-                console.log('Logged in to Facebook');
-                lc.message = 'Logged in to Facebook.';
-                $timeout(function() { // invokes $scope.$apply()
-                    lc.fbData = authData;
+                console.log('Logged in to Google');
+                lc.message = 'Logged in to Google.';
+                $timeout(function () { // invokes $scope.$apply()
+                    lc.gData = authData;
                 });
             }
         });
     }
 
-    // this removes facebook data from local storage
-    // to FULLY logout, you MUST go to facebook.com and logout
-    function deleteFacebookData() {
-        $localStorage.$reset();
-        lc.fbData = {};
-        lc.message = 'Facebook data deleted.'
+    // this removes google data from local storage
+    // to FULLY logout, you MUST go to google.com and logout
+    function deleteGoogleData() {
+        lc.gData = {};
+        lc.message = 'google data deleted.';
     }
-    // bug alert: this delete function sometimes does NOT reset the local storage,
-    // so a page refresh finds facebook data in localstorage.
+
+    function nativeLogin() {
+        console.log('logging in');
+        var ref = new Firebase(url);
+        if(lc.email !== "" || lc.password !== ""){
+
+
+            ref.authWithPassword({
+            email: lc.email,
+            password: lc.password
+        }, function(error, authData) { console.log(error + authData); }, {
+            remember: "sessionOnly"
+        });
+    }}
 }
+
+    // bug alert: this delete function sometimes does NOT reset the local storage,
+    // so a page refresh finds google data in localstorage.
+
+}());
