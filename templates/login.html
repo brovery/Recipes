@@ -1,24 +1,60 @@
 <br>
+<!--Native login-->
 <div>
     <input ng-model="lc.email" type="text" typeof="Email" placeholder="Email">
     <input ng-model="lc.password" type="text" placeholder="Password">
-    <button ng-click="lc.nativeLogin()">Submit</button>
+    <button ng-click="lc.nativeLogin()">Login</button>
 </div>
 <br>
-    <div>
 
-        <button ng-click="lc.googleLogin()">Log in with Google</button>
-        <button ng-click="lc.deleteGoogleData()">Delete data</button>
-        <a href='https://www.google.com/'>Go to Google</a><br/>
-        <br/>
-        <div>{{ lc.message }}</div>
-        <br/>
+<!--Google login-->
+<div>
 
-        <!-- click profile pic to display raw data from facebook -->
-        <div>{{ lc.gData.google.displayName }}</div>
-        <div ng-click="lc.showData=!lc.showData">
-            <img ng-show="lc.gData.google.profileImageURL" ng-src="{{ lc.gData.google.profileImageURL }}">
-        </div>
-        <pre ng-show="lc.showData" ng-bind="lc.gData.google | json"></pre>
+    <button ng-click="lc.googleLogin()">Log in with Google</button>
+    <button ng-click="lc.deleteGoogleData()">Delete data</button>
+    <a href='https://www.google.com/'>Go to Google</a><br/>
+    <br/>
+    <div>{{ lc.message }}</div>
+    <br/>
 
+    <!-- click profile pic to display raw data from facebook -->
+    <div>{{ lc.gData.google.displayName }}</div>
+    <div ng-click="lc.showData=!lc.showData">
+        <img ng-show="lc.gData.google.profileImageURL" ng-src="{{ lc.gData.google.profileImageURL }}">
     </div>
+    <pre ng-show="lc.showData" ng-bind="lc.gData.google | json"></pre>
+
+</div>
+<br>
+
+<!--Create native user-->
+<div>
+    <span>If this is your first time, create an account here</span>
+    <br>
+    <input ng-model="lc.createEmail" type="text" typeof="Email" placeholder="Email">
+    <input ng-model="lc.createPassword" type="text" placeholder="Password">
+    <button ng-click="lc.create()">Create User</button>
+</div>
+<br>
+
+<!--Change email-->
+<div>
+    <span>Change your email here</span>
+    <br>
+    <input ng-model="lc.oldEmail" type="text" typeof="Email" placeholder="Old Email">
+    <input ng-model="lc.newEmail" type="text" typeof="Email" placeholder="New Email">
+    <input ng-model="lc.password" type="text" placeholder="Password">
+    <button ng-click="lc.changeEmail()">Change Email</button>
+</div>
+<br>
+
+<!--Change password-->
+<div>
+    <span>Change your password here</span>
+    <br>
+    <input ng-model="lc.email" type="text" typeof="Email" placeholder="Email">
+    <input ng-model="lc.oldPassword" type="text" typeof="Email" placeholder="Old Password">
+    <input ng-model="lc.newPassword" type="text" placeholder="New Password">
+    <button ng-click="lc.changePassword()">Change Password</button>
+</div>
+<br>
