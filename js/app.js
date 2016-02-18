@@ -34,9 +34,14 @@
                     templateUrl: "templates/about.html"
                 })
                 .state("recipe", {
-                    url: "/recipe",
+                    url: "/:id",
                     templateUrl: "templates/recipe.html",
                     controller: "recipeController as rc"
+                })
+                .state("login", {
+                    url: "/login",
+                    templateUrl: "templates/login.html",
+                    controller: "loginController as lc"
                 });
 
             // if none of the above states are matched, use this as the fallback
