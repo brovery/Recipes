@@ -1,19 +1,24 @@
-<div ng-app="app">
-    <div ng-controller="loginController as lc">
+<br>
+<div>
+    <input ng-model="lc.email" type="text" typeof="Email" placeholder="Email">
+    <input ng-model="lc.password" type="text" placeholder="Password">
+    <button ng-click="lc.nativeLogin()">Submit</button>
+</div>
+<br>
+    <div>
 
-        <button ng-click="lc.facebookLogin()">Log in with Facebook</button>
-        <button ng-click="lc.deleteFacebookData()">Delete data</button>
-        <a href='https://www.facebook.com/'>Go to Facebook</a><br/>
+        <button ng-click="lc.googleLogin()">Log in with Google</button>
+        <button ng-click="lc.deleteGoogleData()">Delete data</button>
+        <a href='https://www.google.com/'>Go to Google</a><br/>
         <br/>
         <div>{{ lc.message }}</div>
         <br/>
 
         <!-- click profile pic to display raw data from facebook -->
-        <div>{{ lc.fbData.facebook.displayName }}</div>
+        <div>{{ lc.gData.google.displayName }}</div>
         <div ng-click="lc.showData=!lc.showData">
-            <img ng-show="lc.fbData.facebook.profileImageURL" ng-src="{{ lc.fbData.facebook.profileImageURL }}">
+            <img ng-show="lc.gData.google.profileImageURL" ng-src="{{ lc.gData.google.profileImageURL }}">
         </div>
-        <pre ng-show="lc.showData" ng-bind="lc.fbData.facebook | json"></pre>
+        <pre ng-show="lc.showData" ng-bind="lc.gData.google | json"></pre>
 
     </div>
-</div>
