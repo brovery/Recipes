@@ -37,10 +37,10 @@
                 </div>
             </div>
             <!--login drop down-->
-            <div ng-controller="loginController as lc">
+            <div ng-controller="loginController as lc" class="btn-group dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Login
                     <span class="caret"></span></button>
-                <ul class="dropdown-menu dropdown-menu-right">
+                <ul class="dropdown-menu">
                     <li>
                         <input ng-model="lc.email" type="text" typeof="Email" placeholder="Email">
                     </li>
