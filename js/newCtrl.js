@@ -14,11 +14,11 @@
 
         // list everything
         var nc = this;
-        nc.fireRecipes = $firebaseArray(reciperef);
+        nc.recipes = $firebaseArray(reciperef);
         nc.fireImage = $firebaseArray(imageref);
         var recipe = function () {
             this.name = "";
-            this.image = "";
+
             this.prepTime = "";
             this.cookTime = "";
             this.ingredients = [];
@@ -26,7 +26,7 @@
             this.category = '';
             this.private = false;
         };
-        nc.image = "";
+
         nc.files = "";
         nc.name = '';
         nc.ingredients = [];
@@ -61,24 +61,14 @@
         }
 
         function addRecipe(recipe) {
-            nc.fireRecipes.$add(recipe);
+            nc.recipes.$add(recipe);
 
         }
 
         nc.addPost = function (files) {
-            var fb = imageref;
             Upload.base64DataUrl(files).then(function (base64Urls) {
-                fb.push({
-                    images: base64Urls
+                nc.files = base64Urls;
 
-                }, function (error) {
-                    if (error) {
-                        console.log("Error:", error);
-                    } else {
-                        console.log("Post set successfully!");
-                    }
-
-                });
             });
         };
 
