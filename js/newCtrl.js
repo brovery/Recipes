@@ -26,7 +26,7 @@
             this.category = '';
             this.private = false;
         };
-
+        nc.file = 'img/Lets-get-cooking.png';
         nc.files = "";
         nc.name = '';
         nc.ingredients = [];
@@ -65,12 +65,12 @@
             nc.prepTime = "";
             nc.cookTime = "";
             nc.category = "";
-
+            nc.file = 'img/Lets-get-cooking.png';
 
         }
 
         function addRecipe(recipe) {
-            nc.recipes.$add(recipe);
+           // nc.recipes.$add(recipe);
 
         }
 

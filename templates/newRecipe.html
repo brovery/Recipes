@@ -1,11 +1,11 @@
 <h2 align="center">Add New Recipe</h2>
 
-{{nc.count}}
+
 <div>
     Name:
     <input type="text" style="width: 300px" placeholder="Mama's Healthy Meatloaf" ng-model="nc.name"/>
 </div>
-
+<br/>
 <div>
     <button class="btn btn-primary" ng-click="nc.ingredients.push({name:'', qty:''})">Add Ingredient</button>
 
@@ -15,7 +15,7 @@
     </div>
 
 </div>
-
+<br/>
 <div>
     <button class="btn btn-primary" ng-click="nc.instructions.push({name:'', step:''})">Add Instructions</button>
 
@@ -25,16 +25,17 @@
     </div>
 
 </div>
+<br/>
 <div>
     Time to Prep:
     <input type="text" placeholder="minutes" ng-model="nc.prepTime"/>
 </div>
-
+<br/>
 <div>
     Time to Cook:
     <input type="text" placeholder="minutes" ng-model="nc.cookTime"/>
 </div>
-
+<br/>
 <div>
     <select name="category" id="cat" ng-model="nc.category">
         <option value="Appetizer">Appetizer</option>
@@ -50,8 +51,8 @@
 <div class="radio">
     <label><input type="radio" name="optradio" value="true" ng-model="nc.privacy" >Private</label>
 </div>
-
-<h4>Upload on file select</h4>
+<br/>
+<h5 ng-inIt>Upload on file select</h5>
 <button class="btn btn-primary" type="file" ngf-select="nc.addPost($file)" ng-model="nc.file"
         accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
     Select File</button>
