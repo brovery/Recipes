@@ -1,16 +1,17 @@
-<div class="alert alert-info">
-    <h3 ng-bind="rc.recipes.name"></h3>
-    <div class="col-sm-6">
-        <img width="100%" ng-src={{rc.recipe.image}} alt="">
-    </div>
-    <div class="col-sm-6">
+<div class="alert alert-info row">
+    <h2 ng-bind="rc.recipe.name" class="recipeTitle"></h2>
+    <div class="col-sm-6 times">
         Prep Time: <span ng-bind="rc.recipe.prepTime"></span><br>
         Cook Time: <span ng-bind="rc.recipe.cookTime"></span>
     </div>
+    <div class="col-sm-6">
+        <img width="100%" ng-src={{rc.recipe.image}} alt="Image of dish">
+    </div>
     <div class="col-sm-12">
+        <hr>
         <h3>Ingredients</h3>
-        <ul>
-            <li ng-repeat="ingredient in rc.recipe.ingredients">
+        <ul class="recIns">
+            <li ng-repeat="ingredient in rc.recipe.ingredients" class="recIns">
                 <span ng-bind="ingredient.ingredient"></span>
                 -
                 <span ng-bind="ingredient.qty"></span>
@@ -18,13 +19,14 @@
         </ul>
     </div>
     <div class="col-sm-12">
+        <hr>
         <h3>Instructions</h3>
-        <ol>
-            <li ng-repeat="instruction in rc.recipe.instructions">
+        <ol class="recIns">
+            <li ng-repeat="instruction in rc.recipe.instructions"  class="recIns">
                 <span ng-bind="instruction.instruction"></span>
             </li>
         </ol>
     </div>
 
-    <button ng-click="rc.initRecipe()">Add Recipe</button>
+
 </div>

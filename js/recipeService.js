@@ -1,4 +1,4 @@
-(function(){
+(function () {
     'use strict';
 
     angular.module('recipeService', [])
@@ -95,9 +95,10 @@
 
         function initRecipe() {
             //rs.recipes.$add(rs.newRecipes);
-            console.log(rs.recipes);
-        }
 
+            console.log(rs.recipes.$keyAt(0));
+
+        }
 
 
         // define functions
