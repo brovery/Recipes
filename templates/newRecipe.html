@@ -1,5 +1,6 @@
 <h2 align="center">Add New Recipe</h2>
 
+{{nc.count}}
 <div>
     Name:
     <input type="text" style="width: 300px" placeholder="Mama's Healthy Meatloaf" ng-model="nc.name"/>
@@ -51,11 +52,13 @@
 </div>
 
 <h4>Upload on file select</h4>
-<button type="file" ngf-select="nc.addPost($file)" ng-model="nc.file"
+<button class="btn btn-primary" type="file" ngf-select="nc.addPost($file)" ng-model="nc.file"
         accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
     Select File</button>
 
+<img ngf-src="nc.file"  style="width: 100px"/>
+
+<br/><br/>
 <button type="button" class="btn btn-primary" ng-click="nc.createRecipe()">Submit</button>
 
-<img ngf-src="nc.file"/>
 
