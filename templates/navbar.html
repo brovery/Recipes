@@ -18,10 +18,11 @@
                     <a ui-sref="home" data-toggle="collapse" data-target=".navbar-collapse.in">Home</a></li>
                 <li ng-class="{ active: nav.isActive('/newRecipe')}">
                     <a ui-sref="newRecipe" data-toggle="collapse" data-target=".navbar-collapse.in">Add Recipe</a></li>
+                <li ng-class="{ active: nav.isActive('/login')}">
+                    <a ui-sref="login" data-toggle="collapse" data-target=".navbar-collapse.in">Create/Edit User</a>
+                </li>
                 <li ng-class="{ active: nav.isActive('/about')}">
                     <a ui-sref="about" data-toggle="collapse" data-target=".navbar-collapse.in">About</a></li>
-                <!--<li ng-class="{ active: nav.isActive('/login')}">-->
-                    <!--<a ui-sref="login" data-toggle="collapse" data-target=".navbar-collapse.in">Login</a></li>-->
             </ul>
             <div class="col-sm-6">
                 <div id="imaginary_container">
@@ -35,11 +36,28 @@
                     </div>
                 </div>
             </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li ng-class="{ active: nav.isActive('/login')}"><a ui-sref="login" data-toggle="collapse" data-target=".navbar-collapse.in">Login</a></li>
-            </ul>
-
-
+            <!--login drop down-->
+            <div ng-controller="loginController as lc">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Login
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <input ng-model="lc.email" type="text" typeof="Email" placeholder="Email">
+                    </li>
+                    <li>
+                        <input ng-model="lc.password" type="text" placeholder="Password">
+                    </li>
+                    <li>
+                        <button ng-click="lc.nativeLogin()">Login</button>
+                    </li>
+                    <hr>
+                    <li>
+                        <button ng-click="lc.googleLogin()">
+                            <img src="img/googleg_standard_color_128dp.png">
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
