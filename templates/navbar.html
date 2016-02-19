@@ -48,13 +48,13 @@
                         <input ng-model="lc.password" type="text" placeholder="Password">
                     </li>
                     <li>
-                        <button ng-click="lc.nativeLogin()">Login</button>
+                        <button ng-click="lc.nativeLogin()" class="btn btn-primary">Login</button>
                     </li>
                     <hr>
                     <li>
-                        <button ng-click="lc.googleLogin()">
+                        <a ng-click="lc.googleLogin()">
                             <img src="img/googleg_standard_color_128dp.png">
-                        </button>
+                        </a>
                     </li>
                 </ul>
             </div>
