@@ -58,6 +58,15 @@
             console.log(newRecipe);
             addRecipe(newRecipe);
 
+            nc.files = "";
+            nc.name = '';
+            nc.ingredients = [];
+            nc.instructions = [];
+            nc.prepTime = "";
+            nc.cookTime = "";
+            nc.category = "";
+
+
         }
 
         function addRecipe(recipe) {
