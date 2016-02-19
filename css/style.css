@@ -2,3 +2,25 @@ h3 { margin-top: 0; }
 h4 { margin-top: 6px !important; }
 .top-margin { margin-top: 50px; }
 input[type=text], button { border: black 1px solid; }
+
+.recipeTitle {
+    text-align: center;
+}
+
+ul.recIns {
+    list-style-type: circle;
+    font-size: larger;
+}
+
+ol.recIns {
+    /*list-style-type: inherit;*/
+    font-size: larger;
+}
+
+li.recIns {
+    margin-bottom: 10px;
+}
+
+.times {
+    font-size: larger;
+}
