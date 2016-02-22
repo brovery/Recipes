@@ -9,12 +9,15 @@
     function recipeService($firebaseArray) {
         var url = 'https://geo-recipes.firebaseio.com/';
         var reciperef = new Firebase(url + "/Recipes");
+        var cookbook = new Firebase(url + "/Cookbooks");
 
         // list everything
         var rs = this;
         rs.recipes = $firebaseArray(reciperef);
+        rs.cookbooks = $firebaseArray(cookbook);
         rs.addRecipe = addRecipe;
         rs.initRecipe = initRecipe;
+        rs.loggedin = {loggedin: true};
         //rs.newRecipes = {
         //    name: "Momma's Healthy Meatloaf",
         //    image: 'img/meatloaf1.jpg',

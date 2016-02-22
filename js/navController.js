@@ -12,6 +12,7 @@
         nav.isActive = isActive;
         nav.search = search;
         nav.recipes = recipeService.recipes;
+        nav.loggedin = recipeService.loggedin;
 
         function isActive(viewLocation) {
             return viewLocation === $location.path();
@@ -22,7 +23,6 @@
                 console.log("No search text!");
             } else {
                 console.log("Searching " + nav.searchText);
-
             }
         }
     }
