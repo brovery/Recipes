@@ -70,7 +70,7 @@
         }
 
         function addRecipe(recipe) {
-           // nc.recipes.$add(recipe);
+            nc.recipes.$add(recipe);
 
         }
 
