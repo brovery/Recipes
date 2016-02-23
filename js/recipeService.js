@@ -38,21 +38,24 @@
         }
 
         function addtoCookBook(id) {
-            //for (var i = 0; i<rs.recipes.length; i++) {
-            //    if (rs.recipes[i].$id == id) {
-            //        rs.recipes[i].users.brandon = true;
-            //        rs.recipes.$save(i);
-            //    }
-            //}
 
-            //rs.users.$add({brandon: {recipes: {id: true}}});
+            // Add the user to the recipe.
+            for (var i = 0; i<rs.recipes.length; i++) {
+                if (rs.recipes[i].$id == id) {
+                    rs.recipes[i].users.brandon = true;
+                    rs.recipes.$save(i);
+                }
+            }
 
-            var thisid = {id: true};
+            // Add the recipe to the user.
+            for (var i = 0; i < rs.users.length; i++) {
 
-            rs.users.brandon.recipes
+                rs.users[i].brandon.recipes[id] = true;
+                rs.users.$save(i);
+                console.log(rs.users[i].brandon);
+            }
 
-            console.log("Adding User");
-            console.log(rs.users);
+
         }
 
     }
