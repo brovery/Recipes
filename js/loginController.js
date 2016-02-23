@@ -185,8 +185,8 @@
         }
 
 //clear modal on close
-        function clearModal () {
-            
-        }
+        $('#myModal').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset');
+        });
     }
 }());
