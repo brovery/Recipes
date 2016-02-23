@@ -20,7 +20,7 @@
         rs.addRecipe = addRecipe;
         rs.addtoCookBook = addtoCookBook;
         rs.initRecipe = initRecipe;
-        rs.loggedin = {loggedin: true};
+        rs.loggedin = {loggedin: false};
 
 
         // define functions
@@ -48,12 +48,12 @@
             }
 
             // Add the recipe to the user.
-            for (var i = 0; i < rs.users.length; i++) {
-
-                rs.users[i].brandon.recipes[id] = true;
-                rs.users.$save(i);
-                console.log(rs.users[i].brandon);
-            }
+            //for (var i = 0; i < rs.users.length; i++) {
+            //
+            //    rs.users[i].brandon.recipes[id] = true;
+            //    rs.users.$save(i);
+            //    console.log(rs.users[i].brandon);
+            //}
 
 
         }

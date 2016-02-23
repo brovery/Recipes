@@ -7,9 +7,9 @@
     angular.module('loginController', [])
         .controller('loginController', loginController);
 
-    loginController.$inject = ['$timeout'];
+    loginController.$inject = ['$timeout', 'recipeService'];
 
-    function loginController($timeout) {
+    function loginController($timeout, recipeService) {
 
         // controller data and functions
         var lc = this;
@@ -29,6 +29,7 @@
         lc.create = create;
         lc.changeEmail = changeEmail;
         lc.changePassword = changePassword;
+        lc.loggedin = recipeService.loggedin;
 
         lc.gData = 'firebase:session::geo-recipes.firebaseio.com';
         // if google data is found in local storage, use it
@@ -50,6 +51,8 @@
                     lc.message = 'Logged in to Google.';
                     $timeout(function () { // invokes $scope.$apply()
                         lc.gData = authData;
+                        recipeService.loggedin.user = authData.uid;
+                        recipeService.loggedin.loggedin = true;
                     });
                 }
             });
@@ -60,6 +63,8 @@
         function deleteGoogleData() {
             lc.gData = {};
             lc.message = 'google data deleted.';
+            recipeService.loggedin.user = "";
+            recipeService.loggedin.loggedin = false;
         }
 
 //Github
@@ -75,6 +80,8 @@
                     lc.message = 'Logged in to github.';
                     $timeout(function () { // invokes $scope.$apply()
                         lc.ghData = authData;
+                        recipeService.loggedin.user = authData.uid;
+                        recipeService.loggedin.loggedin = true;
                     });
                 }
             });
@@ -85,6 +92,8 @@
         function deletegithubData() {
             lc.ghData = {};
             lc.message = 'github data deleted.';
+            recipeService.loggedin.user = "";
+            recipeService.loggedin.loggedin = false;
         }
 
 //Native login
@@ -99,6 +108,11 @@
                     password: lc.password
                 }, function (error, authData) {
                     console.log(error + authData);
+                    if (!error) {
+                        console.log("Logging you in!");
+                        recipeService.loggedin.user = authData.uid;
+                        recipeService.loggedin.loggedin = true;
+                    }
                 }, {
                     remember: "sessionOnly"
                 });
