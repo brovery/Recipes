@@ -30,6 +30,8 @@
         lc.changeEmail = changeEmail;
         lc.changePassword = changePassword;
         lc.loggedin = recipeService.loggedin;
+        lc.recipes = recipeService.recipes;
+        lc.users = recipeService.users;
 
         lc.gData = 'firebase:session::geo-recipes.firebaseio.com';
         // if google data is found in local storage, use it
@@ -53,6 +55,8 @@
                         lc.gData = authData;
                         recipeService.loggedin.user = authData.uid;
                         recipeService.loggedin.loggedin = true;
+                        recipeService.login();
+
                     });
                 }
             });
@@ -82,6 +86,7 @@
                         lc.ghData = authData;
                         recipeService.loggedin.user = authData.uid;
                         recipeService.loggedin.loggedin = true;
+                        recipeService.login();
                     });
                 }
             });
@@ -112,6 +117,7 @@
                         console.log("Logging you in!");
                         recipeService.loggedin.user = authData.uid;
                         recipeService.loggedin.loggedin = true;
+                        recipeService.login();
                     }
                 }, {
                     remember: "sessionOnly"
