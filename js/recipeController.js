@@ -21,7 +21,7 @@
         }
 
         function addtoCookBook(id) {
-            console.log(id);
+            recipeService.addtoCookBook(id);
         }
 
     }
