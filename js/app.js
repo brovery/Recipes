@@ -13,6 +13,7 @@
             "ngFileUpload",
             "loginController"
 
+
         ])
 
         .config(["$stateProvider", "$urlRouterProvider",
