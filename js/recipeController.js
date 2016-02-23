@@ -11,11 +11,17 @@
         var rc = this;
         rc.recipes = recipeService.recipes;
         rc.recipe = recipe;
+        rc.loggedin = recipeService.loggedin;
         rc.initRecipe = initRecipe;
+        rc.addtoCookBook = addtoCookBook;
 
         // define functions
         function initRecipe() {
             recipeService.initRecipe();
+        }
+
+        function addtoCookBook(id) {
+            recipeService.addtoCookBook(id);
         }
 
     }

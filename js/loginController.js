@@ -23,6 +23,8 @@
         lc.newPassword = "";
         lc.googleLogin = googleLogin;
         lc.deleteGoogleData = deleteGoogleData;
+        lc.githubLogin = githubLogin;
+        lc.deletegithubData = deletegithubData;
         lc.nativeLogin = nativeLogin;
         lc.create = create;
         lc.changeEmail = changeEmail;
@@ -58,6 +60,31 @@
         function deleteGoogleData() {
             lc.gData = {};
             lc.message = 'google data deleted.';
+        }
+
+//Github
+        // use Firebase library to login to github
+        function githubLogin() {
+            var ref = new Firebase(url);
+            ref.authWithOAuthPopup('github', function (error, authData) {
+                if (error) {
+                    console.log('Log in to github Failed', error);
+                    lc.message = 'Log in to github Failed. ' + error;
+                } else {
+                    console.log('Logged in to github');
+                    lc.message = 'Logged in to github.';
+                    $timeout(function () { // invokes $scope.$apply()
+                        lc.ghData = authData;
+                    });
+                }
+            });
+        }
+
+        // this removes github data from local storage
+        // to FULLY logout, you MUST go to github.com and logout
+        function deletegithubData() {
+            lc.ghData = {};
+            lc.message = 'github data deleted.';
         }
 
 //Native login
