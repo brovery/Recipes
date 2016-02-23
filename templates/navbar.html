@@ -16,7 +16,7 @@
             <ul class="nav navbar-nav">
                 <li ng-class="{ active: nav.isActive('/home')}">
                     <a ui-sref="home" data-toggle="collapse" data-target=".navbar-collapse.in">Home</a></li>
-                <li ng-class="{ active: nav.isActive('/newRecipe')}">
+                <li ng-show="nav.loggedin.loggedin" ng-class="{ active: nav.isActive('/newRecipe')}">
                     <a ui-sref="newRecipe" data-toggle="collapse" data-target=".navbar-collapse.in">Add Recipe</a></li>
                 <li ng-show="nav.loggedin.loggedin" ng-class="{ active: nav.isActive('/myCookBook')}">
                     <a ui-sref="myCookBook" data-toggle="collapse" data-target=".navbar-collapse.in">My Cookbook</a>
