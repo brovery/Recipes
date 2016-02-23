@@ -11,7 +11,9 @@
             "recipeController",
             "newCtrl",
             "ngFileUpload",
-            "loginController"
+            "loginController",
+            "myCookBookController"
+
 
         ])
 
@@ -33,6 +35,11 @@
                     .state("about", {
                         url: "/about",
                         templateUrl: "templates/about.html"
+                    })
+                    .state("myCookBook", {
+                        url: "/myCookBook",
+                        templateUrl: "templates/myCookBook.html",
+                        controller: "myCookBookController as mcc"
                     })
                     .state("login", {
                         url: "/login",

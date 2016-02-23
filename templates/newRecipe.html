@@ -28,12 +28,12 @@
 <br/>
 <div>
     Time to Prep:
-    <input type="text" placeholder="minutes" ng-model="nc.prepTime"/>
+    <input type="number" placeholder="minutes" ng-model="nc.prepTime"/>
 </div>
 <br/>
 <div>
     Time to Cook:
-    <input type="text" placeholder="minutes" ng-model="nc.cookTime"/>
+    <input type="number" placeholder="minutes" ng-model="nc.cookTime"/>
 </div>
 <br/>
 <div>
@@ -49,26 +49,39 @@
     <label><input type="radio" name="optradio" value="false" ng-model="nc.privacy">Public</label>
 </div>
 <div class="radio">
-    <label><input type="radio" name="optradio" value="true" ng-model="nc.privacy" >Private</label>
+    <label><input type="radio" name="optradio" value="true" ng-model="nc.privacy">Private</label>
 </div>
 <br/>
-<h5 ng-inIt>Upload on file select</h5>
-<button class="btn btn-primary" type="file" ngf-select="nc.addPost($file)" ng-model="nc.file"
-        accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-    Select File</button>
+<h5 ng-inIt>Upload on file select (Less than 2MB)</h5>
+<button ngf-select
+        class="btn btn-primary ng-valid"
+        type="file"
+        ngf-select="nc.addPost($file)"
+        ng-model="nc.file"
+        ngf-resize="{width: 300, height: 300, centerCrop: true}"
+        ngf-accept="'image/*'"
+        ngf-validate="{size: {max: '2MB', min: '10B'}, height: {max: 1200}, width: {max: 1200}, duration: {max: '5m'}}"
+        ng-model-rejected="rejFiles"
+        ngf-change="nc.imageChange(nc.file, rejFiles)"
+        >
+    Select File
+</button>
 
-<img ngf-src="nc.file"  style="width: 100px"/>
+<img ngf-src="nc.file"/>
+{{nc.wrongFile}}
 
 <br/><br/>
 <button type="button" class="btn btn-primary" ng-click="nc.createRecipe()" data-toggle="modal"
-        data-target="#successModal" >Submit</button>
+        data-target="#successModal">Submit
+</button>
 
 
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Success</h4>
             </div>
             <div class="modal-body">
@@ -77,6 +90,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div><!-- /.modal -->

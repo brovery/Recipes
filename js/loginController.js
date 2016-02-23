@@ -7,9 +7,9 @@
     angular.module('loginController', [])
         .controller('loginController', loginController);
 
-    loginController.$inject = ['$timeout'];
+    loginController.$inject = ['$timeout', 'recipeService'];
 
-    function loginController($timeout) {
+    function loginController($timeout, recipeService) {
 
         // controller data and functions
         var lc = this;
@@ -32,6 +32,7 @@
         lc.create = create;
         lc.changeEmail = changeEmail;
         lc.changePassword = changePassword;
+        lc.loggedin = recipeService.loggedin;
 
         lc.gData = 'firebase:session::geo-recipes.firebaseio.com';
         // if google data is found in local storage, use it
@@ -55,6 +56,8 @@
                     lc.loginHideGoogle = true;
                     $timeout(function () { // invokes $scope.$apply()
                         lc.gData = authData;
+                        recipeService.loggedin.user = authData.uid;
+                        recipeService.loggedin.loggedin = true;
                     });
                 }
             });
@@ -65,6 +68,8 @@
         function deleteGoogleData() {
             lc.gData = {};
             lc.message = 'google data deleted.';
+            recipeService.loggedin.user = "";
+            recipeService.loggedin.loggedin = false;
         }
 
 //Github
@@ -82,6 +87,8 @@
                     lc.loginHideGithub = true;
                     $timeout(function () { // invokes $scope.$apply()
                         lc.ghData = authData;
+                        recipeService.loggedin.user = authData.uid;
+                        recipeService.loggedin.loggedin = true;
                     });
                 }
             });
@@ -92,6 +99,8 @@
         function deleteGithubData() {
             lc.ghData = {};
             lc.message = 'github data deleted.';
+            recipeService.loggedin.user = "";
+            recipeService.loggedin.loggedin = false;
         }
 
 //Native login
@@ -112,6 +121,8 @@
                         $timeout(function () {
                             lc.loginHide = true;
                             lc.loginHideNative = true;
+                            recipeService.loggedin.user = authData.uid;
+                            recipeService.loggedin.loggedin = true;
                         });
                     }
                 }, {

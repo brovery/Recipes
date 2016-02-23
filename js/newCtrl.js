@@ -34,9 +34,11 @@
         nc.prepTime = "";
         nc.cookTime = "";
         nc.category = "";
+        nc.wrongFile = "";
 
         nc.privacy = false;
         nc.createRecipe = createRecipe;
+        nc.imageChange = imageChange;
 
         function createRecipe() {
 
@@ -81,6 +83,19 @@
             });
         };
 
+        function imageChange(file, rejFiles){
+            console.log(file);
+            if(rejFiles){
+                nc.wrongFile = "Incorrect file type";
+            }else{
+                nc.wrongFile = "";
+            }
+            if(file === null){
+                nc.wrongFile = "Incorrect file size: 2MB or less";
+            }else{
+                nc.wrongFile = "";
+            }
+        }
 
     }
 }());
