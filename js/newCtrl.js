@@ -4,9 +4,9 @@
     angular.module('newCtrl', [])
         .controller('newCtrl', newCtrl);
 
-    newCtrl.$inject = ['$firebaseArray', 'Upload'];
+    newCtrl.$inject = ['$firebaseArray', 'Upload', 'recipeService'];
 
-    function newCtrl($firebaseArray, Upload) {
+    function newCtrl($firebaseArray, Upload, recipeService) {
 
         var url = 'https://geo-recipes.firebaseio.com/';
         var reciperef = new Firebase(url + "/Recipes");
@@ -33,8 +33,8 @@
         nc.cookTime = "";
         nc.category = "";
         nc.wrongFile = "";
-
         nc.privacy = false;
+        nc.userName = recipeService.loggedin.username;
         nc.createRecipe = createRecipe;
         nc.imageChange = imageChange;
         nc.removeIng = removeIng;
@@ -43,15 +43,15 @@
 
         function createRecipe() {
 
-            if(nc.imageShow === defaultImage){
+            if (nc.imageShow === defaultImage) {
 
             }
 
             var newRecipe = new Recipe();
             newRecipe.name = nc.name;
-            if(nc.imageShow === defaultImage){
+            if (nc.imageShow === defaultImage) {
                 newRecipe.image = defaultImage;
-            }else {
+            } else {
                 newRecipe.image = nc.files;
             }
             newRecipe.prepTime = nc.prepTime;
@@ -91,26 +91,30 @@
             console.log(nc.imageShow);
         }
 
-        function imageChange(file, rejFiles){
+        function imageChange(file, rejFiles) {
 
-            if(rejFiles){
+            if (rejFiles) {
                 nc.wrongFile = "Incorrect file type";
-            }else{
+            } else {
                 nc.wrongFile = "";
             }
-            if(file === null){
+            if (file === null) {
                 nc.wrongFile = "Incorrect file size: 2MB or less";
-            }else{
+            } else {
                 nc.wrongFile = "";
             }
         }
 
-        function removeIng(n){
+        function removeIng(n) {
             nc.ingredients.splice(n, 1);
         }
 
-        function removeIns(n){
+        function removeIns(n) {
             nc.instructions.splice(n, 1);
+        }
+
+        function editName(){
+
         }
 
     }
