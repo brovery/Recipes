@@ -62,9 +62,9 @@
                     $timeout(function () { // invokes $scope.$apply()
                         lc.gData = authData;
                         recipeService.loggedin.user = authData.uid;
+                        recipeService.loggedin.username = authData.google.displayName;
                         recipeService.loggedin.loggedin = true;
                         recipeService.login();
-
                     });
                 }
             });
@@ -77,6 +77,7 @@
             lc.gData = {};
             lc.message = 'google data deleted.';
             recipeService.loggedin.user = "";
+            recipeService.loggedin.username = "";
             recipeService.loggedin.loggedin = false;
         }
 
@@ -111,6 +112,8 @@
             lc.message = 'github data deleted.';
             recipeService.loggedin.user = "";
             recipeService.loggedin.loggedin = false;
+            recipeService.loggedin.username = "";
+
         }
 
 //Native login
@@ -125,6 +128,14 @@
                     password: lc.password
                 }, function (error, authData) {
                     console.log(error + authData);
+<<<<<<< HEAD
+                    if (!error) {
+                        console.log("Logging you in!");
+                        recipeService.loggedin.user = authData.uid;
+                        recipeService.loggedin.username = authData.google.displayName;
+                        recipeService.loggedin.loggedin = true;
+                        recipeService.login();
+=======
                     if (error !== null) {
                         var wrong = "Bad username or Password";
                     } else {
@@ -136,6 +147,7 @@
                             recipeService.login();
                         });
 
+>>>>>>> d6a6a2ea98b4257f5144e684f66f504d24481ade
                     }
                 }, {
                     remember: "sessionOnly"
