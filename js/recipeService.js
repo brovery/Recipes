@@ -28,41 +28,36 @@
 
         function addRecipe(recipe) {
             rs.recipes.$add(recipe);
-            console.log("Added recipe");
         }
 
         function initRecipe() {
             //rs.recipes.$add(rs.newRecipes);
-            console.log(rs.recipes.$keyAt(0));
         }
 
         function addtoCookBook(id) {
-            console.log(id);
-
             // Add the user to the recipe.
-            for (var i = 0; i<rs.recipes.length; i++) {
-                if (rs.recipes[i].$id == id) {
-                    var user = rs.loggedin.user;
-                    console.log(user);
-                    rs.recipes[i].users[user] = true;
-                    rs.recipes.$save(i);
-                }
-            }
+            //for (var i = 0; i<rs.recipes.length; i++) {
+            //    if (rs.recipes[i].$id == id) {
+            //        var user = rs.loggedin.user;
+            //        rs.recipes[i].users[user] = true;
+            //        rs.recipes.$save(i);
+            //    }
+            //}
 
             // Add the recipe to the user.
             for (var i = 0; i < rs.users.length; i++) {
-                rs.users[i].brandon.recipes[id] = true;
-                rs.users.$save(i);
-                console.log(rs.users[i].brandon);
+                if (Object.keys(rs.users[i])[0] == rs.loggedin.user) {
+                    rs.users[i].recipes[id] = true;
+                    //rs.users.$save(i);
+                }
             }
         }
 
         function login() {
+            console.log(rs.loggedin);
             var priorlogin = false;
             for (var i = 0; i < rs.users.length; i++) {
-                console.log(Object.keys(rs.users[i])[0]);
                 if (Object.keys(rs.users[i])[0] == rs.loggedin.user) {
-                    console.log("IT'S A MATCH!");
                     priorlogin = true;
                 }
             }
