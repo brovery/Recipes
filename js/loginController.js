@@ -7,9 +7,9 @@
     angular.module('loginController', [])
         .controller('loginController', loginController);
 
-    loginController.$inject = ['$timeout', 'recipeService'];
+    loginController.$inject = ['$timeout', 'recipeService', '$localStorage'];
 
-    function loginController($timeout, recipeService) {
+    function loginController($timeout, recipeService, $localStorage) {
 
         // controller data and functions
         var lc = this;
@@ -21,19 +21,27 @@
         lc.oldPassword = "";
         lc.newEmail = "";
         lc.newPassword = "";
+        lc.loginHide = false;
+        lc.successHide = false;
+        lc.failHide = false;
         lc.googleLogin = googleLogin;
         lc.deleteGoogleData = deleteGoogleData;
         lc.githubLogin = githubLogin;
-        lc.deletegithubData = deletegithubData;
+        lc.deleteGithubData = deleteGithubData;
         lc.nativeLogin = nativeLogin;
         lc.create = create;
         lc.changeEmail = changeEmail;
         lc.changePassword = changePassword;
         lc.loggedin = recipeService.loggedin;
+        lc.recipes = recipeService.recipes;
+        lc.users = recipeService.users;
 
         lc.gData = 'firebase:session::geo-recipes.firebaseio.com';
         // if google data is found in local storage, use it
         lc.message = lc.gData && lc.gData.google ? "Logged in to Google." : "No Google data found.";
+        lc.ghData = $localStorage['firebase:session::geo-recipes.firebaseio.com'];
+        // if google data is found in local storage, use it
+        lc.message = lc.ghData && lc.ghData.github ? "Logged in to GitHub." : "No GitHub data found.";
 
         // IMPORTANT: change to match the URL of your Firebase.
         var url = 'https://geo-recipes.firebaseio.com/';
@@ -49,10 +57,14 @@
                 } else {
                     console.log('Logged in to Google');
                     lc.message = 'Logged in to Google.';
+                    lc.loginHide = true;
+                    lc.loginHideGoogle = true;
                     $timeout(function () { // invokes $scope.$apply()
                         lc.gData = authData;
                         recipeService.loggedin.user = authData.uid;
                         recipeService.loggedin.loggedin = true;
+                        recipeService.login();
+
                     });
                 }
             });
@@ -61,6 +73,7 @@
         // this removes google data from local storage
         // to FULLY logout, you MUST go to google.com and logout
         function deleteGoogleData() {
+            $localStorage.$reset();
             lc.gData = {};
             lc.message = 'google data deleted.';
             recipeService.loggedin.user = "";
@@ -78,10 +91,13 @@
                 } else {
                     console.log('Logged in to github');
                     lc.message = 'Logged in to github.';
+                    lc.loginHide = true;
+                    lc.loginHideGithub = true;
                     $timeout(function () { // invokes $scope.$apply()
                         lc.ghData = authData;
                         recipeService.loggedin.user = authData.uid;
                         recipeService.loggedin.loggedin = true;
+                        recipeService.login();
                     });
                 }
             });
@@ -89,7 +105,8 @@
 
         // this removes github data from local storage
         // to FULLY logout, you MUST go to github.com and logout
-        function deletegithubData() {
+        function deleteGithubData() {
+            $localStorage.$reset();
             lc.ghData = {};
             lc.message = 'github data deleted.';
             recipeService.loggedin.user = "";
@@ -108,13 +125,21 @@
                     password: lc.password
                 }, function (error, authData) {
                     console.log(error + authData);
-                    if (!error) {
-                        console.log("Logging you in!");
-                        recipeService.loggedin.user = authData.uid;
-                        recipeService.loggedin.loggedin = true;
+                    if (error !== null) {
+                        var wrong = "Bad username or Password";
+                    } else {
+                        $timeout(function () {
+                            lc.loginHide = true;
+                            lc.loginHideNative = true;
+                            recipeService.loggedin.user = authData.uid;
+                            recipeService.loggedin.loggedin = true;
+                            recipeService.login();
+                        });
+
                     }
                 }, {
                     remember: "sessionOnly"
+
                 });
             }
         }
@@ -126,11 +151,18 @@
                 email: lc.createEmail,
                 password: lc.createPassword
             }, function (error, userData) {
-                if (error) {
-                    console.log("Error creating user:", error);
-                } else {
-                    console.log("Successfully created user account with uid:", userData.uid);
-                }
+                $timeout(function () {
+                    if (error) {
+                        console.log("Error creating user:", error);
+                        lc.failHide = true;
+                        lc.failLoginHide = true;
+                        lc.successHide = false;
+                    } else {
+                        console.log("Successfully created user account with uid:", userData.uid);
+                        lc.successHide = true;
+                        lc.failHide = false;
+                    }
+                });
             });
         }
 
@@ -138,15 +170,23 @@
         function changeEmail() {
             var ref = new Firebase(url);
             ref.changeEmail({
-                oldEmail : lc.oldEmail,
-                newEmail : lc.newEmail,
-                password : lc.password
-            }, function(error) {
-                if (error === null) {
-                    console.log("Email changed successfully");
-                } else {
-                    console.log("Error changing email:", error);
-                }
+                oldEmail: lc.oldEmail,
+                newEmail: lc.newEmail,
+                password: lc.password
+            }, function (error) {
+                $timeout(function () {
+                    if (error === null) {
+                        console.log("Email changed successfully");
+                        lc.successHide = true;
+                        lc.failHide = false;
+
+                    } else {
+                        console.log("Error changing email:", error);
+                        lc.failHide = true;
+                        lc.emailFail = true;
+                        lc.successHide = false;
+                    }
+                });
             });
         }
 
@@ -154,15 +194,22 @@
         function changePassword() {
             var ref = new Firebase(url);
             ref.changePassword({
-                email       : lc.email,
-                oldPassword : lc.oldPassword,
-                newPassword : lc.newPassword,
-            }, function(error) {
-                if (error === null) {
-                    console.log("Password changed successfully");
-                } else {
-                    console.log("Error changing password:", error);
-                }
+                email: lc.email,
+                oldPassword: lc.oldPassword,
+                newPassword: lc.newPassword,
+            }, function (error) {
+                $timeout(function () {
+                    if (error === null) {
+                        console.log("Password changed successfully");
+                        lc.successHide = true;
+                        lc.failHide = false;
+                    } else {
+                        console.log("Error changing password:", error);
+                        lc.failHide = true;
+                        lc.passFail = true;
+                        lc.successHide = false;
+                    }
+                });
             });
         }
     }

@@ -12,13 +12,14 @@
             "newCtrl",
             "ngFileUpload",
             "loginController",
-            "myCookBookController"
+            "myCookBookController",
+            "ngStorage"
 
 
         ])
 
-        .config(["$stateProvider", "$urlRouterProvider",
-            function ($stateProvider, $urlRouterProvider) {
+        .config(["$stateProvider", "$urlRouterProvider", "$localStorageProvider",
+            function ($stateProvider, $urlRouterProvider, $localStorageProvider) {
 
                 // define all app states (pages)
                 $stateProvider
@@ -59,6 +60,9 @@
 
                 // if none of the above states are matched, use this as the fallback
                 $urlRouterProvider.otherwise("/home");
+
+                //local storage
+                $localStorageProvider.setKeyPrefix('');
             }]);
 
 }());
