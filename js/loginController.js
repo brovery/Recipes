@@ -128,14 +128,6 @@
                     password: lc.password
                 }, function (error, authData) {
                     console.log(error + authData);
-<<<<<<< HEAD
-                    if (!error) {
-                        console.log("Logging you in!");
-                        recipeService.loggedin.user = authData.uid;
-                        recipeService.loggedin.username = authData.google.displayName;
-                        recipeService.loggedin.loggedin = true;
-                        recipeService.login();
-=======
                     if (error !== null) {
                         var wrong = "Bad username or Password";
                     } else {
@@ -143,11 +135,10 @@
                             lc.loginHide = true;
                             lc.loginHideNative = true;
                             recipeService.loggedin.user = authData.uid;
+                            recipeService.loggedin.username = authData.google.displayName;
                             recipeService.loggedin.loggedin = true;
                             recipeService.login();
                         });
-
->>>>>>> d6a6a2ea98b4257f5144e684f66f504d24481ade
                     }
                 }, {
                     remember: "sessionOnly"
