@@ -10,8 +10,9 @@
     <button class="btn btn-primary" ng-click="nc.ingredients.push({name:'', qty:''})">Add Ingredient</button>
 
     <div ng-repeat="ingredient in nc.ingredients">
-        <input type="text" placeholder="Ingredient Name" ng-model="ingredient.name"/>
-        <input type="text" placeholder="Ingredient Quantity" ng-model="ingredient.qty"/>
+        <input type="text" placeholder="Name" ng-model="ingredient.name"/>
+        <input type="text" placeholder="Quantity" ng-model="ingredient.qty"/>
+        <span class="glyphicon glyphicon-remove" ng-click="nc.removeIng($index)" aria-hidden="true"></span>
     </div>
 
 </div>
@@ -21,7 +22,8 @@
 
     <div ng-repeat="(rowIndex, instruction) in nc.instructions">
         Step {{rowIndex + 1}}:
-        <input style="width: 300px" type="text" placeholder="Instruction Name" ng-model="instruction.name"/>
+        <input style="width: 300px" type="text" placeholder="Instruction" ng-model="instruction.name"/>
+        <span class="glyphicon glyphicon-remove" ng-click="nc.removeIns($index)" aria-hidden="true"></span>
     </div>
 
 </div>
@@ -54,20 +56,20 @@
 <br/>
 <h5 ng-inIt>Upload on file select (Less than 2MB)</h5>
 <button ngf-select
-        class="btn btn-primary ng-valid"
+        class="btn btn-primary"
         type="file"
-        ngf-select="nc.addPost($file)"
+        ngf-change="nc.addPost($file)"
         ng-model="nc.file"
         ngf-resize="{width: 300, height: 300, centerCrop: true}"
         ngf-accept="'image/*'"
         ngf-validate="{size: {max: '2MB', min: '10B'}, height: {max: 1200}, width: {max: 1200}, duration: {max: '5m'}}"
         ng-model-rejected="rejFiles"
-        ngf-change="nc.imageChange(nc.file, rejFiles)"
-        >
+        ngf-change="nc.imageChange(nc.files, rejFiles)">
+
     Select File
 </button>
 
-<img ngf-src="nc.file"/>
+<img ngf-src="nc.imageShow"/>
 {{nc.wrongFile}}
 
 <br/><br/>
