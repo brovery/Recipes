@@ -24,7 +24,8 @@
             this.instructions = [];
             this.category = '';
         };
-        nc.imageShow = 'img/Lets-get-cooking.png';
+        var defaultImage = 'img/Lets-get-cooking.png';
+        nc.imageShow = defaultImage;
         nc.name = '';
         nc.ingredients = [];
         nc.instructions = [];
@@ -42,13 +43,17 @@
 
         function createRecipe() {
 
-            if(nc.imageShow === undefined){
-                addPost(nc.imageShow);
+            if(nc.imageShow === defaultImage){
+
             }
 
             var newRecipe = new Recipe();
             newRecipe.name = nc.name;
-            newRecipe.image = nc.files;
+            if(nc.imageShow === defaultImage){
+                newRecipe.image = defaultImage;
+            }else {
+                newRecipe.image = nc.files;
+            }
             newRecipe.prepTime = nc.prepTime;
             newRecipe.cookTime = nc.cookTime;
             newRecipe.category = nc.category;
@@ -101,7 +106,6 @@
         }
 
         function removeIng(n){
-            console.log(nc.imageShow);
             nc.ingredients.splice(n, 1);
         }
 
