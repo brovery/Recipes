@@ -36,15 +36,39 @@
         lc.recipes = recipeService.recipes;
         lc.users = recipeService.users;
 
-        lc.gData = $localStorage['firebase:session::geo-recipes.firebaseio.com'];
+        lc.gData = $localStorage['firebase:session::geo-recipes'];
         // if google data is found in local storage, use it
         lc.message = lc.gData && lc.gData.google ? "Logged in to Google." : "No Google data found.";
-        lc.ghData = $localStorage['firebase:session::geo-recipes.firebaseio.com'];
+        lc.ghData = $localStorage['firebase:session::geo-recipes'];
         // if google data is found in local storage, use it
         lc.message = lc.ghData && lc.ghData.github ? "Logged in to GitHub." : "No GitHub data found.";
 
         // IMPORTANT: change to match the URL of your Firebase.
         var url = 'https://geo-recipes.firebaseio.com/';
+
+//Checking for local storage
+
+            if (lc.gData) {
+                lc.loginHide = true;
+                lc.loginHideGoogle = true;
+                brandon(lc.gData);
+            } else if (lc.ghdata) {
+                lc.loginHide = true;
+                lc.loginHideGithub = true;
+                brandon(lc.ghData);
+            } else {
+                lc.loginHide = false;
+            }
+
+        function brandon(authData) {
+            console.log(authData);
+//TODO check if logging in with google or github
+            if()
+            recipeService.loggedin.user = authData.uid;
+            recipeService.loggedin.username = authData.github.displayName;
+            recipeService.loggedin.loggedin = true;
+            recipeService.login();
+        }
 
 //Google
         // use Firebase library to login to google
@@ -61,10 +85,7 @@
                     lc.loginHideGoogle = true;
                     $timeout(function () { // invokes $scope.$apply()
                         lc.gData = authData;
-                        recipeService.loggedin.user = authData.uid;
-                        recipeService.loggedin.username = authData.google.displayName;
-                        recipeService.loggedin.loggedin = true;
-                        recipeService.login();
+                        brandon(authData);
                     });
                 }
             });
@@ -96,9 +117,7 @@
                     lc.loginHideGithub = true;
                     $timeout(function () { // invokes $scope.$apply()
                         lc.ghData = authData;
-                        recipeService.loggedin.user = authData.uid;
-                        recipeService.loggedin.loggedin = true;
-                        recipeService.login();
+                        brandon(authData);
                     });
                 }
             });
@@ -134,10 +153,7 @@
                         $timeout(function () {
                             lc.loginHide = true;
                             lc.loginHideNative = true;
-                            recipeService.loggedin.user = authData.uid;
-                            recipeService.loggedin.username = authData.google.displayName;
-                            recipeService.loggedin.loggedin = true;
-                            recipeService.login();
+                            brandon(authData);
                         });
                     }
                 }, {
