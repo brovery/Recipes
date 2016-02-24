@@ -54,6 +54,15 @@
     <label><input type="radio" name="optradio" value="true" ng-model="nc.privacy">Private</label>
 </div>
 <br/>
+
+<div>Added by:
+    <span ng-model="nc.userName"></span>
+    <input type="text" ng-model="nc.userName" ng-hide="nc.editHide"/>
+    <span class="glyphicon glyphicon-pencil" ng-click="nc.removeIns($index)" aria-hidden="true"></span>
+
+</div>
+
+
 <h5 ng-inIt>Upload on file select (Less than 2MB)</h5>
 <button ngf-select
         class="btn btn-primary"
