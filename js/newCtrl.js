@@ -16,18 +16,15 @@
         var nc = this;
         nc.recipes = $firebaseArray(reciperef);
         nc.fireImage = $firebaseArray(imageref);
-        var recipe = function () {
+        var Recipe = function () {
             this.name = "";
-
             this.prepTime = "";
             this.cookTime = "";
             this.ingredients = [];
             this.instructions = [];
             this.category = '';
-            this.private = false;
         };
-        nc.file = 'img/Lets-get-cooking.png';
-        nc.files = "";
+        nc.imageShow = 'img/Lets-get-cooking.png';
         nc.name = '';
         nc.ingredients = [];
         nc.instructions = [];
@@ -39,11 +36,17 @@
         nc.privacy = false;
         nc.createRecipe = createRecipe;
         nc.imageChange = imageChange;
+        nc.removeIng = removeIng;
+        nc.removeIns = removeIns;
+        nc.addPost = addPost;
 
         function createRecipe() {
 
+            if(nc.imageShow === undefined){
+                addPost(nc.imageShow);
+            }
 
-            var newRecipe = new recipe;
+            var newRecipe = new Recipe();
             newRecipe.name = nc.name;
             newRecipe.image = nc.files;
             newRecipe.prepTime = nc.prepTime;
@@ -57,17 +60,16 @@
             for (i = 0; i < nc.instructions.length; i++) {
                 newRecipe.instructions.push({instruction: nc.instructions[i].name});
             }
-            console.log(newRecipe);
+
             addRecipe(newRecipe);
 
-            nc.files = "";
             nc.name = '';
             nc.ingredients = [];
             nc.instructions = [];
             nc.prepTime = "";
             nc.cookTime = "";
             nc.category = "";
-            nc.file = 'img/Lets-get-cooking.png';
+            nc.imageShow = 'img/Lets-get-cooking.png';
 
         }
 
@@ -76,15 +78,16 @@
 
         }
 
-        nc.addPost = function (files) {
+        function addPost(files) {
             Upload.base64DataUrl(files).then(function (base64Urls) {
                 nc.files = base64Urls;
-
             });
-        };
+            nc.imageShow = files;
+            console.log(nc.imageShow);
+        }
 
         function imageChange(file, rejFiles){
-            console.log(file);
+
             if(rejFiles){
                 nc.wrongFile = "Incorrect file type";
             }else{
@@ -95,6 +98,15 @@
             }else{
                 nc.wrongFile = "";
             }
+        }
+
+        function removeIng(n){
+            console.log(nc.imageShow);
+            nc.ingredients.splice(n, 1);
+        }
+
+        function removeIns(n){
+            nc.instructions.splice(n, 1);
         }
 
     }
