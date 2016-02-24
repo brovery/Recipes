@@ -62,9 +62,9 @@
                     $timeout(function () { // invokes $scope.$apply()
                         lc.gData = authData;
                         recipeService.loggedin.user = authData.uid;
+                        recipeService.loggedin.username = authData.google.displayName;
                         recipeService.loggedin.loggedin = true;
                         recipeService.login();
-
                     });
                 }
             });
@@ -77,6 +77,7 @@
             lc.gData = {};
             lc.message = 'google data deleted.';
             recipeService.loggedin.user = "";
+            recipeService.loggedin.username = "";
             recipeService.loggedin.loggedin = false;
         }
 
@@ -111,6 +112,8 @@
             lc.message = 'github data deleted.';
             recipeService.loggedin.user = "";
             recipeService.loggedin.loggedin = false;
+            recipeService.loggedin.username = "";
+
         }
 
 //Native login
@@ -132,10 +135,10 @@
                             lc.loginHide = true;
                             lc.loginHideNative = true;
                             recipeService.loggedin.user = authData.uid;
+                            recipeService.loggedin.username = authData.google.displayName;
                             recipeService.loggedin.loggedin = true;
                             recipeService.login();
                         });
-
                     }
                 }, {
                     remember: "sessionOnly"
