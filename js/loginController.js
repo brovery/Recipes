@@ -36,7 +36,7 @@
         lc.recipes = recipeService.recipes;
         lc.users = recipeService.users;
 
-        lc.gData = 'firebase:session::geo-recipes.firebaseio.com';
+        lc.gData = $localStorage['firebase:session::geo-recipes.firebaseio.com'];
         // if google data is found in local storage, use it
         lc.message = lc.gData && lc.gData.google ? "Logged in to Google." : "No Google data found.";
         lc.ghData = $localStorage['firebase:session::geo-recipes.firebaseio.com'];
