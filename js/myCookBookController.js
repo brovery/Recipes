@@ -11,9 +11,8 @@
         var mcc = this;
         mcc.loggedin = recipeService.loggedin;
         mcc.recipes = recipeService.recipes;
-        mcc.cookbook = recipeService.cookbooks;
-        mcc.myCookbook = "";
-
+        mcc.cookbook = recipeService.cookbook;
+        
 
         // define functions
 
