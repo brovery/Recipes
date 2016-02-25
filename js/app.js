@@ -13,7 +13,8 @@
             "ngFileUpload",
             "loginController",
             "myCookBookController",
-            "ngStorage"
+            "ngStorage",
+            "app.filters"
 
 
         ])
