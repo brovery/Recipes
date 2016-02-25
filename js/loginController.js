@@ -48,6 +48,7 @@
 
 //Checking for local storage
 
+        $timeout(function() {
             if (lc.gData) {
                 lc.loginHide = true;
                 lc.loginHideGoogle = true;
@@ -59,13 +60,15 @@
             } else {
                 lc.loginHide = false;
             }
+        }, 1000);
+
 
         function brandon(authData) {
-            console.log(authData);
+            //console.log(authData);
 //TODO check if logging in with google or github
-            if()
+//            if()
             recipeService.loggedin.user = authData.uid;
-            recipeService.loggedin.username = authData.github.displayName;
+            recipeService.loggedin.username = authData.google.displayName;
             recipeService.loggedin.loggedin = true;
             recipeService.login();
         }
