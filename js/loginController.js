@@ -1,6 +1,3 @@
-/**
- * Created by danielgraff1 on 2/17/16.
- */
 (function () {
     'use strict';
 
@@ -22,6 +19,7 @@
         lc.newEmail = "";
         lc.newPassword = "";
         lc.loginHide = false;
+        lc.loginName = "Login";
         lc.successHide = false;
         lc.failHide = false;
         lc.googleLogin = googleLogin;
@@ -48,15 +46,17 @@
 
 //Checking for local storage
 
-        $timeout(function() {
+        $timeout(function () {
             if (lc.gData) {
                 lc.loginHide = true;
                 lc.loginHideGoogle = true;
                 brandon(lc.gData);
-            } else if (lc.ghdata) {
+                lc.loginName = "Logout";
+            } else if (lc.ghData) {
                 lc.loginHide = true;
                 lc.loginHideGithub = true;
                 brandon(lc.ghData);
+                lc.loginName = "Logout";
             } else {
                 lc.loginHide = false;
             }
@@ -66,7 +66,10 @@
         function brandon(authData) {
             //console.log(authData);
 //TODO check if logging in with google or github
-//            if()
+//            var gauthData = authData.google.displayName;
+//            var ghauthData = authData.github.displayName;
+
+
             recipeService.loggedin.user = authData.uid;
             recipeService.loggedin.username = authData.google.displayName;
             recipeService.loggedin.loggedin = true;
@@ -89,6 +92,7 @@
                     $timeout(function () { // invokes $scope.$apply()
                         lc.gData = authData;
                         brandon(authData);
+                        lc.loginName = "Logout";
                     });
                 }
             });
@@ -97,12 +101,16 @@
         // this removes google data from local storage
         // to FULLY logout, you MUST go to google.com and logout
         function deleteGoogleData() {
+            var ref = new Firebase(url);
+            ref.unauth();
             $localStorage.$reset();
             lc.gData = {};
             lc.message = 'google data deleted.';
             recipeService.loggedin.user = "";
             recipeService.loggedin.username = "";
             recipeService.loggedin.loggedin = false;
+            lc.loginName = "Login";
+            lc.loginHideGoogle = false;
         }
 
 //Github
@@ -121,6 +129,7 @@
                     $timeout(function () { // invokes $scope.$apply()
                         lc.ghData = authData;
                         brandon(authData);
+                        lc.loginName = "Logout";
                     });
                 }
             });
@@ -129,13 +138,15 @@
         // this removes github data from local storage
         // to FULLY logout, you MUST go to github.com and logout
         function deleteGithubData() {
+            var ref = new Firebase(url);
+            ref.unauth();
             $localStorage.$reset();
             lc.ghData = {};
             lc.message = 'github data deleted.';
             recipeService.loggedin.user = "";
             recipeService.loggedin.loggedin = false;
             recipeService.loggedin.username = "";
-
+            console.log("Logged out of Github");
         }
 
 //Native login
@@ -157,6 +168,7 @@
                             lc.loginHide = true;
                             lc.loginHideNative = true;
                             brandon(authData);
+                            lc.loginName = "Logout";
                         });
                     }
                 }, {
