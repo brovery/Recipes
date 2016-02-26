@@ -8,14 +8,12 @@
 
     function newCtrl($firebaseArray, Upload, recipeService) {
 
-        var url = 'https://geo-recipes.firebaseio.com/';
-        var reciperef = new Firebase(url + "/Recipes");
-        var imageref = new Firebase(url + "/images");
+        //var url = 'https://geo-recipes.firebaseio.com/';
+        //var reciperef = new Firebase(url + "/Recipes");
 
         // list everything
         var nc = this;
-        nc.recipes = $firebaseArray(reciperef);
-        nc.fireImage = $firebaseArray(imageref);
+        nc.recipes = recipeService.recipes;
         var Recipe = function () {
             this.name = "";
             this.prepTime = "";
@@ -124,6 +122,10 @@
 
         function editName(){
             nc.editHide = false;
+        }
+
+        function star(){
+
         }
     }
 }());
