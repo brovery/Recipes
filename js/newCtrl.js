@@ -23,6 +23,10 @@
             this.ingredients = [];
             this.instructions = [];
             this.category = '';
+            this.rating = {
+                rates: 0,
+                rating: 0
+            };
         };
         var defaultImage = 'img/Lets-get-cooking.png';
         nc.imageShow = defaultImage;
@@ -35,11 +39,13 @@
         nc.wrongFile = "";
         nc.privacy = false;
         nc.userName = recipeService.loggedin.username;
+        nc.editHide = true;
         nc.createRecipe = createRecipe;
         nc.imageChange = imageChange;
         nc.removeIng = removeIng;
         nc.removeIns = removeIns;
         nc.addPost = addPost;
+        nc.editName = editName;
 
         function createRecipe() {
 
@@ -58,6 +64,7 @@
             newRecipe.cookTime = nc.cookTime;
             newRecipe.category = nc.category;
             newRecipe.private = nc.privacy;
+            newRecipe.userName = nc.userName;
 
             for (var i = 0; i < nc.ingredients.length; i++) {
                 newRecipe.ingredients.push({ingredient: nc.ingredients[i].name, qty: nc.ingredients[i].qty});
@@ -75,12 +82,14 @@
             nc.cookTime = "";
             nc.category = "";
             nc.imageShow = 'img/Lets-get-cooking.png';
-
         }
 
         function addRecipe(recipe) {
-            nc.recipes.$add(recipe);
-
+            nc.recipes.$add(recipe).then(function(ref){
+                var recipesId = ref.key();
+                console.log(recipesId);
+                recipeService.addtoCookBook(recipesId);
+            });
         }
 
         function addPost(files) {
@@ -92,7 +101,6 @@
         }
 
         function imageChange(file, rejFiles) {
-
             if (rejFiles) {
                 nc.wrongFile = "Incorrect file type";
             } else {
@@ -106,6 +114,7 @@
         }
 
         function removeIng(n) {
+            console.log(recipeService.loggedin);
             nc.ingredients.splice(n, 1);
         }
 
@@ -114,8 +123,7 @@
         }
 
         function editName(){
-
+            nc.editHide = false;
         }
-
     }
 }());

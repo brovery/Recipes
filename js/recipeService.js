@@ -9,19 +9,19 @@
     function recipeService($firebaseArray) {
         var url = 'https://geo-recipes.firebaseio.com';
         var reciperef = new Firebase(url + "/Recipes");
-        var cookbook = new Firebase(url + "/Cookbooks");
         var users = new Firebase(url + "/Users");
 
         // list everything
         var rs = this;
         rs.recipes = $firebaseArray(reciperef);
-        rs.cookbooks = $firebaseArray(cookbook);
         rs.users = $firebaseArray(users);
         rs.addRecipe = addRecipe;
         rs.addtoCookBook = addtoCookBook;
         rs.initRecipe = initRecipe;
         rs.loggedin = {loggedin: false};
         rs.login = login;
+        rs.userindex = -1;
+        var key = "";
 
 
         // define functions
@@ -45,28 +45,47 @@
             //}
 
             // Add the recipe to the user.
-            for (var i = 0; i < rs.users.length; i++) {
-                if (Object.keys(rs.users[i])[0] == rs.loggedin.user) {
-                    rs.users[i].recipes[id] = true;
-                    //rs.users.$save(i);
+            var alreadyadded = false;
+            for (var i = 0; i < rs.cookbook.length; i++) {
+                if (id == rs.cookbook[i].recipe) {
+                    alreadyadded = true;
+                    console.log("Already Added!");
                 }
+            }
+            if (!alreadyadded) {
+                rs.cookbook.$add({recipe: id});
+                console.log("Added Recipe to your cookbook!");
             }
         }
 
         function login() {
-            console.log(rs.loggedin);
             var priorlogin = false;
             for (var i = 0; i < rs.users.length; i++) {
-                if (Object.keys(rs.users[i])[0] == rs.loggedin.user) {
+                if (rs.users[i].user == rs.loggedin.user) {
                     priorlogin = true;
+                    rs.userindex = i;
+                    key = rs.users[i].$id;
                 }
             }
 
             if (!priorlogin) {
-                var useradd = {};
-                useradd[rs.loggedin.user] = {Recipes: {1: true}};
-                rs.users.$add(useradd);
+                rs.users.$add({user: rs.loggedin.user}).then(function(ref) {
+                    key = ref.key();
+                    firebook();
+                });
+                rs.userindex = rs.users.length;
+            } else {
+                firebook();
             }
+
+
+        }
+
+        function firebook() {
+            // Create link to the user's cookbook.
+            var cookbookurl = users + "/" + key + "/recipes";
+            var mycookbook = new Firebase(cookbookurl);
+            rs.cookbook = $firebaseArray(mycookbook);
         }
 
     }
