@@ -5,9 +5,20 @@
         .module('app.filters')
         .filter('cookbook', cookbook);
 
-    function cookbook() {
+    cookbook.$inject = ['recipeService'];
+
+    function cookbook(recipeService) {
         return function(input) {
-            return input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+            var newrecipes = [];
+            for (var i = 0; i < input.length; i++) {
+                for (var j = 0; j < recipeService.cookbook.length; j++) {
+                    if (input[i].$id == recipeService.cookbook[j].recipe) {
+                        newrecipes.push(input[i])
+                    }
+                }
+            }
+
+            return newrecipes;
         };
     }
 })();
