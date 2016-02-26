@@ -82,12 +82,14 @@
             nc.cookTime = "";
             nc.category = "";
             nc.imageShow = 'img/Lets-get-cooking.png';
-
         }
 
         function addRecipe(recipe) {
-            nc.recipes.$add(recipe);
-
+            nc.recipes.$add(recipe).then(function(ref){
+                var recipesId = ref.key();
+                console.log(recipesId);
+                recipeService.addtoCookBook(recipesId);
+            });
         }
 
         function addPost(files) {
@@ -99,7 +101,6 @@
         }
 
         function imageChange(file, rejFiles) {
-
             if (rejFiles) {
                 nc.wrongFile = "Incorrect file type";
             } else {
@@ -124,6 +125,5 @@
         function editName(){
             nc.editHide = false;
         }
-
     }
 }());
