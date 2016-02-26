@@ -1,8 +1,8 @@
 <div class="alert alert-info row">
     <h2 ng-bind="rc.recipe.name" class="recipeTitle"></h2>
     <div class="col-sm-6 times">
-        Prep Time: <span ng-bind="rc.recipe.prepTime"></span><br>
-        Cook Time: <span ng-bind="rc.recipe.cookTime"></span>
+        Prep Time: <span ng-bind="rc.recipe.prepTime | times"></span><br>
+        Cook Time: <span ng-bind="rc.recipe.cookTime | times"></span>
     </div>
     <div class="col-sm-6">
         <img width="100%" ng-src={{rc.recipe.image}} alt="Image of dish">
