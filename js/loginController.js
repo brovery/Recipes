@@ -53,7 +53,7 @@
                 lc.loginHide = true;
                 lc.loginHideGoogle = true;
                 brandon(lc.gData);
-            } else if (lc.ghdata) {
+            } else if (lc.ghData) {
                 lc.loginHide = true;
                 lc.loginHideGithub = true;
                 brandon(lc.ghData);
@@ -66,7 +66,10 @@
         function brandon(authData) {
             //console.log(authData);
 //TODO check if logging in with google or github
-//            if()
+            var gauthData = authData.google.displayName;
+            var ghauthData = authData.github.displayName;
+
+
             recipeService.loggedin.user = authData.uid;
             recipeService.loggedin.username = authData.google.displayName;
             recipeService.loggedin.loggedin = true;
@@ -97,6 +100,7 @@
         // this removes google data from local storage
         // to FULLY logout, you MUST go to google.com and logout
         function deleteGoogleData() {
+            ref.unauth();
             $localStorage.$reset();
             lc.gData = {};
             lc.message = 'google data deleted.';
