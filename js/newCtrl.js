@@ -4,12 +4,9 @@
     angular.module('newCtrl', [])
         .controller('newCtrl', newCtrl);
 
-    newCtrl.$inject = ['$firebaseArray', 'Upload', 'recipeService'];
+    newCtrl.$inject = ['Upload', 'recipeService'];
 
-    function newCtrl($firebaseArray, Upload, recipeService) {
-
-        //var url = 'https://geo-recipes.firebaseio.com/';
-        //var reciperef = new Firebase(url + "/Recipes");
+    function newCtrl(Upload, recipeService) {
 
         // list everything
         var nc = this;
@@ -21,10 +18,7 @@
             this.ingredients = [];
             this.instructions = [];
             this.category = '';
-            this.rating = {
-                rates: 0,
-                rating: 0
-            };
+            this.rating = [];
         };
         var defaultImage = 'img/Lets-get-cooking.png';
         nc.imageShow = defaultImage;
@@ -70,6 +64,10 @@
             for (i = 0; i < nc.instructions.length; i++) {
                 newRecipe.instructions.push({instruction: nc.instructions[i].name});
             }
+
+            var someNameObj = {};
+            someNameObj[recipeService.loggedin.user] = 5;
+            newRecipe.rating.push(someNameObj);
 
             addRecipe(newRecipe);
 
@@ -124,8 +122,5 @@
             nc.editHide = false;
         }
 
-        function star(){
-
-        }
     }
 }());

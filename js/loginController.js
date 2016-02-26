@@ -63,9 +63,9 @@
         function brandon(authData) {
             console.log(authData);
 //TODO check if logging in with google or github
-
+            if()
             recipeService.loggedin.user = authData.uid;
-            recipeService.loggedin.username = authData.google.displayName;
+            recipeService.loggedin.username = authData.github.displayName;
             recipeService.loggedin.loggedin = true;
             recipeService.login();
         }

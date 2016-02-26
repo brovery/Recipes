@@ -1,5 +1,14 @@
 <div class="alert alert-info row">
     <h2 ng-bind="rc.recipe.name" class="recipeTitle"></h2>
+
+    <div class="rating" >
+        <span ng-click="rc.star(rc.recipe.$id, 5)" id="5star">☆</span>
+        <span ng-click="rc.star(rc.recipe.$id, 4)" id="4star">☆</span>
+        <span ng-click="rc.star(rc.recipe.$id, 3)" id="3star">☆</span>
+        <span ng-click="rc.star(rc.recipe.$id, 2)" id="2star">☆</span>
+        <span ng-click="rc.star(rc.recipe.$id, 1)" id="1star">☆</span>
+    </div>
+
     <div class="col-sm-6 times">
         Prep Time: <span ng-bind="rc.recipe.prepTime"></span><br>
         Cook Time: <span ng-bind="rc.recipe.cookTime"></span>
