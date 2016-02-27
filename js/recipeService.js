@@ -4,9 +4,9 @@
     angular.module('recipeService', [])
         .service('recipeService', recipeService);
 
-    recipeService.$inject = ['$firebaseArray'];
+    recipeService.$inject = ['$firebaseArray', '$interval'];
 
-    function recipeService($firebaseArray) {
+    function recipeService($firebaseArray, $interval) {
         var url = 'https://geo-recipes.firebaseio.com';
         var reciperef = new Firebase(url + "/Recipes");
         var users = new Firebase(url + "/Users");
@@ -59,26 +59,35 @@
         }
 
         function login() {
-            var priorlogin = false;
-            for (var i = 0; i < rs.users.length; i++) {
-                if (rs.users[i].user == rs.loggedin.user) {
-                    priorlogin = true;
-                    rs.userindex = i;
-                    key = rs.users[i].$id;
+            var priorlogin = false, count = 0;
+
+            $interval(function() {
+                if (rs.users.length == 0) {
+                    count++;
+                } else {
+                    for (var i = 0; i < rs.users.length; i++) {
+                        if (rs.users[i].user == rs.loggedin.user) {
+                            priorlogin = true;
+                            rs.userindex = i;
+                            key = rs.users[i].$id;
+                        }
+                    }
+
+                    if (!priorlogin) {
+                        rs.users.$add({user: rs.loggedin.user}).then(function(ref) {
+                            key = ref.key();
+                            firebook();
+                        });
+                        rs.userindex = rs.users.length;
+                    } else {
+                        firebook();
+                    }
                 }
+            }, 1000, 3);
+
+            if (count == 3) {
+                alert("Unable to connect to database. Please try again later.")
             }
-
-            if (!priorlogin) {
-                rs.users.$add({user: rs.loggedin.user}).then(function(ref) {
-                    key = ref.key();
-                    firebook();
-                });
-                rs.userindex = rs.users.length;
-            } else {
-                firebook();
-            }
-
-
         }
 
         function firebook() {

@@ -54,8 +54,6 @@
                         controller: "recipeController as rc",
                         resolve: {
                             recipe: function ($stateParams, recipeService) {
-                                console.log(recipeService.recipes[$stateParams.id]);
-                                console.log($stateParams);
                                 for (var i = 0; i < recipeService.recipes.length; i++) {
                                     if (recipeService.recipes[i].$id == $stateParams.id) {
                                         return recipeService.recipes[i];
