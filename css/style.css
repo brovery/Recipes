@@ -24,3 +24,11 @@ li.recIns {
 .times {
     font-size: larger;
 }
+
+#loginImage {
+    width: 30px;
+}
+
+#loginDef {
+    display: none;
+}
