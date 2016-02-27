@@ -24,6 +24,7 @@
 
     function times() {
         return function(input) {
+            console.log(typeof input + ": " + input);
             if (typeof input !== "number") {
                 return "N/A";
             }
