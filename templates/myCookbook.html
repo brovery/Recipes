@@ -1,10 +1,14 @@
 <div class="alert alert-warning row">
 
     <h1>This is my cookbook page!</h1>
+<<<<<<< HEAD
+    <div ng-repeat="recipe in mcc.recipes ">
+=======
     <div ng-repeat="recipe in mcc.recipes | cookbook">
+>>>>>>> origin/John
         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <span ng-bind="recipe.name"></span>
-            <a href="#/{{$index}}">
+            <a href="#/{{recipe.$id}}">
                 <img class="img-responsive" ng-src={{recipe.image}} alt="Lets get cooking">
             </a>
         </div>
