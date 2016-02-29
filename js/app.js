@@ -14,7 +14,8 @@
             "loginController",
             "myCookBookController",
             "ngStorage",
-            "app.filters"
+            "app.filters",
+            "editrecipeController"
 
 
         ])
@@ -48,20 +49,28 @@
                         templateUrl: "templates/login.html",
                         controller: "loginController as lc"
                     })
+                    .state("editRecipe", {
+                        url: "/editRecipe",
+                        templateUrl: "templates/editRecipe.html",
+                        controller: "editrecipeController as ec"
+
+                    })
                     .state("recipe", {
                         url: "/:id",
                         templateUrl: "templates/recipe.html",
                         controller: "recipeController as rc",
                         resolve: {
-                            recipe: function ($stateParams, recipeService) {
+                            recipe: function ($stateParams, recipeService, $localStorage) {
                                 for (var i = 0; i < recipeService.recipes.length; i++) {
                                     if (recipeService.recipes[i].$id == $stateParams.id) {
+                                        $localStorage.curRecipe = recipeService.recipes[i];
                                         return recipeService.recipes[i];
                                     }
                                 }
                             }
                         }
-                    });
+                    })
+                    ;
 
                 // if none of the above states are matched, use this as the fallback
                 $urlRouterProvider.otherwise("/home");
