@@ -6,15 +6,17 @@
         .filter('cookbook', cookbook)
         .filter('times', times);
 
-    cookbook.$inject = ['recipeService'];
+    cookbook.$inject = ['recipeService', '$interval'];
 
-    function cookbook(recipeService) {
+    function cookbook(recipeService, $interval) {
         return function(input) {
             var newrecipes = [];
-            for (var i = 0; i < input.length; i++) {
-                for (var j = 0; j < recipeService.cookbook.length; j++) {
-                    if (input[i].$id == recipeService.cookbook[j].recipe) {
-                        newrecipes.push(input[i]);
+            if (input != undefined && recipeService.cookbook != undefined) {
+                for (var i = 0; i < input.length; i++) {
+                    for (var j = 0; j < recipeService.cookbook.length; j++) {
+                        if (input[i].$id == recipeService.cookbook[j].recipe) {
+                            newrecipes.push(input[i]);
+                        }
                     }
                 }
             }
