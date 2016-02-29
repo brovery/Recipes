@@ -60,10 +60,10 @@
                         templateUrl: "templates/recipe.html",
                         controller: "recipeController as rc",
                         resolve: {
-                            recipe: function ($stateParams, recipeService) {
+                            recipe: function ($stateParams, recipeService, $localStorage) {
                                 for (var i = 0; i < recipeService.recipes.length; i++) {
                                     if (recipeService.recipes[i].$id == $stateParams.id) {
-                                        recipeService.curRecipe = recipeService.recipes[i];
+                                        $localStorage.curRecipe = recipeService.recipes[i];
                                         return recipeService.recipes[i];
                                     }
                                 }

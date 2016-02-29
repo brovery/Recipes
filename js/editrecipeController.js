@@ -17,7 +17,7 @@
 
         // define functions
         function editRecipe() {
-            console.log(ec.curRecipe);
+            console.log(ec.curRecipe.ingredients);
         }
 
     }

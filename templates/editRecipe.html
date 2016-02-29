@@ -3,40 +3,44 @@
     <div class="form-group">
         <label for="recipeName">Recipe Name</label>
         <input type="text" class="form-control" id="recipeName" ng-model="ec.curRecipe.name">
+        <div class="form-inline">
+            <label for="prepTime">Prep Time</label>
+            <input id="prepTime" type="number" ng-model="ec.curRecipe.prepTime"/>
+            <label for="cookTime">Cook Time</label>
+            <input id="cookTime" type="number" ng-model="ec.curRecipe.cookTime"/>
+        </div>
+
+        <div class="form-horizontal" ng-repeat="ingredient in ec.curRecipe.ingredients">
+            <div class="form-group">
+                <label for="ingredientName" class="col-sm-1 control-label">Name</label>
+                <div class="col-sm-5">
+                    <input id="ingredientName" type="text" class="form-control" ng-model="ingredient.ingredient"/>
+                </div>
+                <label for="ingredientQuantity" class="col-sm-1 control-label">Quantity</label>
+                <div class="col-sm-5">
+                    <input id="ingredientQuantity" type="text" class="form-control" ng-model="ingredient.qty"/>
+                </div>
+            </div>
+        </div>
+
+        <!-- TODO: Add a button to add an ingredient.-->
+
+        <div class="form-horizontal" ng-repeat="instruction in ec.curRecipe.instructions">
+            <div class="form-group">
+                <label for="instruction" class="col-sm-1 control-label">Instruction</label>
+                <div class="col-sm-11">
+                    <textarea id="instruction" type="text" class="form-control" ng-model="instruction.instruction"/>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!--  TODO: Add a button to add an instruction.-->
 
-    
-    
-    <!--<h2 ng-bind="rc.recipe.name" class="recipeTitle"></h2>-->
-
-    <!--<div class="col-sm-6 times">-->
-        <!--Prep Time: <span ng-bind="rc.recipe.prepTime | times"></span><br>-->
-        <!--Cook Time: <span ng-bind="rc.recipe.cookTime | times"></span>-->
-    <!--</div>-->
     <!--<div class="col-sm-6">-->
         <!--<img width="100%" ng-src={{rc.recipe.image}} alt="Image of dish">-->
     <!--</div>-->
-    <!--<div class="col-sm-12">-->
-        <!--<hr>-->
-        <!--<h3>Ingredients</h3>-->
-        <!--<ul class="recIns">-->
-            <!--<li ng-repeat="ingredient in rc.recipe.ingredients" class="recIns">-->
-                <!--<span ng-bind="ingredient.ingredient"></span>-->
-                <!-- - -->
-                <!--<span ng-bind="ingredient.qty"></span>-->
-            <!--</li>-->
-        <!--</ul>-->
-    <!--</div>-->
-    <!--<div class="col-sm-12">-->
-        <!--<hr>-->
-        <!--<h3>Instructions</h3>-->
-        <!--<ol class="recIns">-->
-            <!--<li ng-repeat="instruction in rc.recipe.instructions"  class="recIns">-->
-                <!--<span ng-bind="instruction.instruction"></span>-->
-            <!--</li>-->
-        <!--</ol>-->
-    <!--</div>-->
+
 
     <button class="btn btn-primary" ng-click="ec.editRecipe()">Edit this Recipe</button>
 </div>
