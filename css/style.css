@@ -25,6 +25,14 @@ li.recIns {
     font-size: larger;
 }
 
+#loginImage {
+    width: 30px;
+}
+
+#loginDef {
+    display: none;
+}
+
 .rating {
      unicode-bidi: bidi-override;
      direction: rtl;
