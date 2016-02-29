@@ -41,8 +41,8 @@
 
             <!--login drop down-->
             <div ng-controller="loginController as lc" class="btn-group dropdown navbar-right">
-                <button ng-hide="lc.loginHide" class="btn btn-primary dropdown-toggle" type="button"
-                        data-toggle="dropdown">Login
+                <button class="btn btn-primary dropdown-toggle" type="button"
+                        data-toggle="dropdown" ng-bind="lc.loginName" ng-click="lc.deleteGoogleData()">
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <li>
@@ -56,17 +56,17 @@
                     </li>
                     <hr>
                     <li>
-                        <a ng-click="lc.googleLogin()">
+                        <a ng-click="lc.genericLogin('google')">
                             <img src="img/googleg_standard_color_128dp.png" style="width: 30px;">
                         </a>
-                        <a ng-click="lc.githubLogin()">
+                        <a ng-click="lc.genericLogin('github')">
                             <img src="img/GitHub.png" style="width: 30px;">
                         </a>
                     </li>
                 </ul>
-                <img ng-show="lc.loginHideGoogle" ng-src="{{ lc.gData.google.profileImageURL }}" style="width: 30px;">
-                <img ng-show="lc.loginHideGithub" ng-src="{{ lc.ghData.github.profileImageURL }}" style="width: 30px;">
-                <div ng-show="lc.loginHideNative">Logged In</div>
+                <img id="loginImage" ng-src="{{ lc.loginImage }}">
+                <!--<img ng-if="lc.loginHideGithub" ng-src="{{ lc.ghData.github.profileImageURL }}" style="width: 30px;">-->
+                <div id="loginDef">Logged In</div>
             </div>
         </div>
     </div>
