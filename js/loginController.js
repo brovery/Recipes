@@ -22,8 +22,7 @@
         lc.loginName = "Login";
         lc.successHide = false;
         lc.failHide = false;
-        lc.deleteGoogleData = deleteGoogleData;
-        lc.deleteGithubData = deleteGithubData;
+        lc.deleteData = deleteData;
         lc.nativeLogin = nativeLogin;
         lc.create = create;
         lc.changeEmail = changeEmail;
@@ -94,9 +93,10 @@
             });
         }
 
+//logout
         // this removes google data from local storage
         // to FULLY logout, you MUST go to google.com and logout
-        function deleteGoogleData() {
+        function deleteData() {
             ref.unauth();
             $localStorage.$reset();
             lc.loginData = {};
@@ -106,19 +106,8 @@
             recipeService.loggedin.loggedin = false;
             lc.loginName = "Login";
             lc.loginHideGoogle = false;
-        }
-
-        // this removes github data from local storage
-        // to FULLY logout, you MUST go to github.com and logout
-        function deleteGithubData() {
-            ref.unauth();
-            $localStorage.$reset();
-            lc.loginData = {};
-            lc.message = 'github data deleted.';
-            recipeService.loggedin.user = "";
-            recipeService.loggedin.loggedin = false;
-            recipeService.loggedin.username = "";
-            console.log("Logged out of Github");
+            $("#loginDef").css("display", "none");
+            lc.loginHideNative = true;
         }
 
 //Native login

@@ -36,13 +36,16 @@
                         </button>
                     </span>
                     </div>
+                    <div>
+
+                    </div>
                 </div>
             </div>
 
             <!--login drop down-->
             <div ng-controller="loginController as lc" class="btn-group dropdown navbar-right">
                 <button class="btn btn-primary dropdown-toggle" type="button"
-                        data-toggle="dropdown" ng-bind="lc.loginName" ng-click="lc.deleteGoogleData()">
+                        data-toggle="dropdown" ng-bind="lc.loginName" ng-click="lc.deleteData()">
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <li>
@@ -64,9 +67,9 @@
                         </a>
                     </li>
                 </ul>
-                <img id="loginImage" ng-src="{{ lc.loginImage }}">
+                <img ng-if="lc.loginHideGoogle" id="loginImage" ng-src="{{ lc.loginImage }}">
                 <!--<img ng-if="lc.loginHideGithub" ng-src="{{ lc.ghData.github.profileImageURL }}" style="width: 30px;">-->
-                <div id="loginDef">Logged In</div>
+                <div ng-if="lc.loginHideNative" id="loginDef">{{lc.email}}</div>
             </div>
         </div>
     </div>

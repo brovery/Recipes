@@ -23,6 +23,7 @@
                 console.log("No search text!");
             } else {
                 console.log("Searching " + nav.searchText);
+                
             }
         }
     }
