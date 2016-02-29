@@ -1,0 +1,42 @@
+<div class="alert alert-info row">
+    <h3>Edit Recipe Page</h3>
+    <div class="form-group">
+        <label for="recipeName">Recipe Name</label>
+        <input type="text" class="form-control" id="recipeName" ng-model="ec.curRecipe.name">
+    </div>
+
+
+    
+    
+    <!--<h2 ng-bind="rc.recipe.name" class="recipeTitle"></h2>-->
+
+    <!--<div class="col-sm-6 times">-->
+        <!--Prep Time: <span ng-bind="rc.recipe.prepTime | times"></span><br>-->
+        <!--Cook Time: <span ng-bind="rc.recipe.cookTime | times"></span>-->
+    <!--</div>-->
+    <!--<div class="col-sm-6">-->
+        <!--<img width="100%" ng-src={{rc.recipe.image}} alt="Image of dish">-->
+    <!--</div>-->
+    <!--<div class="col-sm-12">-->
+        <!--<hr>-->
+        <!--<h3>Ingredients</h3>-->
+        <!--<ul class="recIns">-->
+            <!--<li ng-repeat="ingredient in rc.recipe.ingredients" class="recIns">-->
+                <!--<span ng-bind="ingredient.ingredient"></span>-->
+                <!-- - -->
+                <!--<span ng-bind="ingredient.qty"></span>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
+    <!--<div class="col-sm-12">-->
+        <!--<hr>-->
+        <!--<h3>Instructions</h3>-->
+        <!--<ol class="recIns">-->
+            <!--<li ng-repeat="instruction in rc.recipe.instructions"  class="recIns">-->
+                <!--<span ng-bind="instruction.instruction"></span>-->
+            <!--</li>-->
+        <!--</ol>-->
+    <!--</div>-->
+
+    <button class="btn btn-primary" ng-click="ec.editRecipe()">Edit this Recipe</button>
+</div>

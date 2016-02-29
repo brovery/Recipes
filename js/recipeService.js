@@ -4,9 +4,9 @@
     angular.module('recipeService', [])
         .service('recipeService', recipeService);
 
-    recipeService.$inject = ['$firebaseArray', '$interval'];
+    recipeService.$inject = ['$firebaseArray', '$interval', "$localStorage"];
 
-    function recipeService($firebaseArray, $interval) {
+    function recipeService($firebaseArray, $interval, $localStorage) {
         var url = 'https://geo-recipes.firebaseio.com';
         var reciperef = new Firebase(url + "/Recipes");
         var users = new Firebase(url + "/Users");
@@ -22,8 +22,11 @@
         rs.loggedin = {loggedin: false};
         rs.login = login;
         rs.userindex = -1;
+        rs.curRecipe = $localStorage['curRecipe'];
         var key = "";
 
+        console.log("Current Recipe: ");
+        console.log(rs.curRecipe);
 
         // define functions
 
