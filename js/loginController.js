@@ -138,6 +138,7 @@
                     } else {
                         lc.loginHide = true;
                         lc.loginHideNative = true;
+                        lc.loginData = authData;
                         brandon(authData);
                         lc.loginName = "Logout";
                     }
