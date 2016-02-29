@@ -18,6 +18,7 @@
         rs.addRecipe = addRecipe;
         rs.addtoCookBook = addtoCookBook;
         rs.initRecipe = initRecipe;
+        rs.removeRecipe = removeRecipe;
         rs.loggedin = {loggedin: false};
         rs.login = login;
         rs.userindex = -1;
@@ -55,6 +56,16 @@
             if (!alreadyadded) {
                 rs.cookbook.$add({recipe: id});
                 console.log("Added Recipe to your cookbook!");
+            }
+        }
+
+        function removeRecipe(id) {
+            for (var i = 0; i < rs.cookbook.length; i++) {
+                if (rs.cookbook[i].recipe == id) {
+                    rs.cookbook.$remove(rs.cookbook[i]).catch(function(error) {
+                        console.log(error);
+                    });
+                }
             }
         }
 
