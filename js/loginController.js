@@ -99,7 +99,7 @@
         function deleteGoogleData() {
             ref.unauth();
             $localStorage.$reset();
-            lc.gData = {};
+            lc.loginData = {};
             lc.message = 'google data deleted.';
             recipeService.loggedin.user = "";
             recipeService.loggedin.username = "";
@@ -113,7 +113,7 @@
         function deleteGithubData() {
             ref.unauth();
             $localStorage.$reset();
-            lc.ghData = {};
+            lc.loginData = {};
             lc.message = 'github data deleted.';
             recipeService.loggedin.user = "";
             recipeService.loggedin.loggedin = false;
