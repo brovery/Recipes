@@ -17,7 +17,12 @@
 
         // define functions
         function editRecipe() {
-            console.log(ec.curRecipe.ingredients);
+            delete ec.curRecipe["rating"];
+            ec.curRecipe.userName = recipeService.loggedin.username;
+            recipeService.recipes.$add(ec.curRecipe).then(function(ref) {
+                ec.key = ref.key();
+                recipeService.addtoCookBook(ec.key);
+            });
         }
 
     }

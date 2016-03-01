@@ -17,6 +17,10 @@
         rc.editRecipe = editRecipe;
         rc.star = star;
 
+        if (rc.recipe == undefined) {
+            rc.recipe = $localStorage.curRecipe;
+        }
+
         // define functions
         function initRecipe() {
             recipeService.initRecipe();

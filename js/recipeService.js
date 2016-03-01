@@ -25,9 +25,6 @@
         rs.curRecipe = $localStorage['curRecipe'];
         var key = "";
 
-        console.log("Current Recipe: ");
-        console.log(rs.curRecipe);
-
         // define functions
 
         function addRecipe(recipe) {
