@@ -23,7 +23,6 @@
         rs.userindex = -1;
         var key = "";
 
-
         // define functions
 
         function addRecipe(recipe) {
