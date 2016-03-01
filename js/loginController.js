@@ -78,8 +78,8 @@
 
 // Generic Login. This will log you in depending upon which link you click.
         function genericLogin(serv) {
-            ref.authWithOAuthPopup(serv, function(error, authData) {
-                if(error) {
+            ref.authWithOAuthPopup(serv, function (error, authData) {
+                if (error) {
                     console.log('Log in to ' + serv + ' Failed', error);
                     lc.message = 'Log in to ' + serv + ' Failed ' + error;
                 } else {
