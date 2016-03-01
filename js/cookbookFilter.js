@@ -4,7 +4,8 @@
     angular
         .module('app.filters')
         .filter('cookbook', cookbook)
-        .filter('times', times);
+        .filter('times', times)
+        .filter('query', query);
 
     cookbook.$inject = ['recipeService', '$interval'];
 
@@ -37,4 +38,11 @@
             }
         };
     }
+
+    function query() {
+        return function(input) {
+
+        };
+    }
 })();
+
