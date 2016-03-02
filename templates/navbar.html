@@ -21,7 +21,7 @@
                 <li ng-show="nav.loggedin.loggedin" ng-class="{ active: nav.isActive('/myCookBook')}">
                     <a ui-sref="myCookBook" data-toggle="collapse" data-target=".navbar-collapse.in">My Cookbook</a>
                 <li ng-class="{ active: nav.isActive('/login')}">
-                    <a ui-sref="login" data-toggle="collapse" data-target=".navbar-collapse.in">Create/Edit User</a>
+                    <a ui-sref="login" data-toggle="collapse" data-target=".navbar-collapse.in">Create/Edit Account</a>
                 </li>
                 <li ng-class="{ active: nav.isActive('/about')}">
                     <a ui-sref="about" data-toggle="collapse" data-target=".navbar-collapse.in">About</a></li>
@@ -29,20 +29,21 @@
             <div class="col-sm-4">
                 <div id="imaginary_container">
                     <div class="input-group stylish-input-group">
-                        <input type="text" class="form-control" placeholder="Search" ng-model="nav.searchText">
-                    <span class="input-group-addon">
-                        <button ng-click="nav.search()">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
+                        <input type="text" class="form-control" placeholder="Search" ng-model="search.name">
                     </div>
+                    <ul ng-show="search">
+                        <li ng-repeat="recipe in nav.recipes | query">
+                            {{recipe.name}}
+                        </li>
+                    </ul>
+                    </ul>
                 </div>
             </div>
 
             <!--login drop down-->
             <div ng-controller="loginController as lc" class="btn-group dropdown navbar-right">
                 <button class="btn btn-primary dropdown-toggle" type="button"
-                        data-toggle="dropdown" ng-bind="lc.loginName" ng-click="lc.deleteGoogleData()">
+                        data-toggle="dropdown" ng-bind="lc.loginName" ng-click="lc.deleteData()">
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                     <li>
@@ -64,9 +65,9 @@
                         </a>
                     </li>
                 </ul>
-                <img id="loginImage" ng-src="{{ lc.loginImage }}">
+                <img ng-if="lc.loginHideGoogle" id="loginImage" ng-src="{{ lc.loginImage }}">
                 <!--<img ng-if="lc.loginHideGithub" ng-src="{{ lc.ghData.github.profileImageURL }}" style="width: 30px;">-->
-                <div id="loginDef">Logged In</div>
+                <div ng-if="lc.loginHideNative" id="loginDef">{{lc.email}}</div>
             </div>
         </div>
     </div>

@@ -4,9 +4,9 @@
     angular.module('recipeService', [])
         .service('recipeService', recipeService);
 
-    recipeService.$inject = ['$firebaseArray', '$interval'];
+    recipeService.$inject = ['$firebaseArray', '$interval', "$localStorage"];
 
-    function recipeService($firebaseArray, $interval) {
+    function recipeService($firebaseArray, $interval, $localStorage) {
         var url = 'https://geo-recipes.firebaseio.com';
         var reciperef = new Firebase(url + "/Recipes");
         var users = new Firebase(url + "/Users");
@@ -18,9 +18,11 @@
         rs.addRecipe = addRecipe;
         rs.addtoCookBook = addtoCookBook;
         rs.initRecipe = initRecipe;
+        rs.removeRecipe = removeRecipe;
         rs.loggedin = {loggedin: false};
         rs.login = login;
         rs.userindex = -1;
+        rs.curRecipe = $localStorage['curRecipe'];
         var key = "";
 
         // define functions
@@ -54,6 +56,16 @@
             if (!alreadyadded) {
                 rs.cookbook.$add({recipe: id});
                 console.log("Added Recipe to your cookbook!");
+            }
+        }
+
+        function removeRecipe(id) {
+            for (var i = 0; i < rs.cookbook.length; i++) {
+                if (rs.cookbook[i].recipe == id) {
+                    rs.cookbook.$remove(rs.cookbook[i]).catch(function(error) {
+                        console.log(error);
+                    });
+                }
             }
         }
 
