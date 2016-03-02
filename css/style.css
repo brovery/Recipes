@@ -67,3 +67,13 @@ li.recIns {
 #5star{
 
 }
+
+.recipeImage {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.img-container {
+    height: 300px;
+    overflow: hidden;
+}

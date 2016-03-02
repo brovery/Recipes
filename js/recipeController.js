@@ -13,6 +13,7 @@
         rc.recipes = recipeService.recipes;
         rc.recipe = recipe;
         rc.loggedin = recipeService.loggedin;
+        rc.addToCookBookButton = recipeService.addToCookBookButton;
         rc.initRecipe = initRecipe;
         rc.addtoCookBook = addtoCookBook;
         rc.editRecipe = editRecipe;
@@ -31,6 +32,7 @@
 
         function addtoCookBook(id) {
             recipeService.addtoCookBook(id);
+            $('.add-button').css("display", "none");
         }
 
         function star(id, n) {
