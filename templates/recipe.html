@@ -1,15 +1,18 @@
 <div class="alert alert-info row" ng-init="rc.getRating(rc.recipe.$id)">
     <h2 ng-bind="rc.recipe.name" class="recipeTitle"></h2>
 
-    <div class="rating">
+    <div>
+        <span ng-bind="rc.rating.rating"></span>
+    <span class="rating">
         <span ng-click="rc.star(rc.recipe.$id, 5)" id="5star">☆</span>
         <span ng-click="rc.star(rc.recipe.$id, 4)" id="4star">☆</span>
         <span ng-click="rc.star(rc.recipe.$id, 3)" id="3star">☆</span>
         <span ng-click="rc.star(rc.recipe.$id, 2)" id="2star">☆</span>
         <span ng-click="rc.star(rc.recipe.$id, 1)" id="1star">☆</span>
 
+    </span>
+
     </div>
-    <span ng-bind="rc.rating.rating"></span>
     <div class="col-sm-6 times">
         Prep Time: <span ng-bind="rc.recipe.prepTime | times"></span><br>
         Cook Time: <span ng-bind="rc.recipe.cookTime | times"></span>
@@ -32,7 +35,7 @@
         <hr>
         <h3>Instructions</h3>
         <ol class="recIns">
-            <li ng-repeat="instruction in rc.recipe.instructions"  class="recIns">
+            <li ng-repeat="instruction in rc.recipe.instructions" class="recIns">
                 <span ng-bind="instruction.instruction"></span>
             </li>
         </ol>
@@ -41,6 +44,8 @@
     <a href="#/editRecipe">
         <button class="btn btn-primary" ng-click="rc.editRecipe()">Edit this Recipe</button>
     </a>
-    <button ng-show="rc.loggedin.loggedin" class="btn btn-primary" ng-click="rc.addtoCookBook(rc.recipe.$id)">Add to Cookbook</button>
+    <button ng-show="rc.loggedin.loggedin" class="btn btn-primary" ng-click="rc.addtoCookBook(rc.recipe.$id)">Add to
+        Cookbook
+    </button>
 
 </div>

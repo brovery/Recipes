@@ -99,7 +99,7 @@
             }, 1000, 3);
 
             if (count == 3) {
-                alert("Unable to connect to database. Please try again later.")
+                alert("Unable to connect to database. Please try again later.");
             }
         }
 
@@ -115,15 +115,18 @@
             var rate = $firebaseArray(rating);
             var total = 0;
 
-            rate.$loaded(function(){
-                var len = rate.length - 2;
-                for(var i = 0; i < len; i++){
-                    total += rate[i].rating;
+            rate.$loaded(function() {
+                var len = rate.length - 1;
+                if (len !== 0) {
+                    for (var i = 0; i < len; i++) {
+                        total += rate[i].rating;
+                    }
+                    total /= len;
+                }else{
+                    total = 0;
                 }
-                total /= len;
-
             }).then(function(){
-                rs.rateTotal.rating = total.toPrecision(3);
+                rs.rateTotal.rating = total.toPrecision(1);
             });
 
         }

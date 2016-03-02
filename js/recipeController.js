@@ -65,7 +65,7 @@
             $interval(function () {
                 recipeService.getRating(key);
                 rc.rating = recipeService.rateTotal;
-                console.log(rc.rating);
+
             }, 1000, 3);
 
         }
