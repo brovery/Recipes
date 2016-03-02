@@ -1,16 +1,16 @@
-(function() {
+(function () {
     "use strict";
 
     angular
         .module('app.filters')
         .filter('cookbook', cookbook)
         .filter('times', times)
-        .filter('query', query);
+        .filter('searchRecipes', searchRecipes);
 
     cookbook.$inject = ['recipeService', '$interval'];
 
     function cookbook(recipeService, $interval) {
-        return function(input) {
+        return function (input) {
             var newrecipes = [];
             if (input != undefined && recipeService.cookbook != undefined) {
                 for (var i = 0; i < input.length; i++) {
@@ -26,22 +26,25 @@
     }
 
     function times() {
-        return function(input) {
+        return function (input) {
             if (typeof input !== "number") {
                 return "N/A";
             }
 
             if (input >= 60) {
-                return Math.floor(input/60) + " hrs, " + input % 60 + " minutes";
+                return Math.floor(input / 60) + " hrs, " + input % 60 + " minutes";
             } else {
                 return input + " minutes";
             }
         };
     }
 
-    function query() {
-        return function(input) {
-
+    function searchRecipes() {
+        return function () {
+            $scope.search = function (recipe) {
+                return (angular.lowercase(recipe.name).indexOf(angular.lowercase($scope.query) || '') !== -1 ||
+                angular.lowercase(recipe.ingredients).indexOf(angular.lowercase($scope.query) || '') !== -1);
+            };
         };
     }
 })();
