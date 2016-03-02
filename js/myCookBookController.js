@@ -12,9 +12,13 @@
         mcc.loggedin = recipeService.loggedin;
         mcc.recipes = recipeService.recipes;
         mcc.cookbook = recipeService.cookbook;
+        mcc.removeRecipe = removeRecipe;
         
 
         // define functions
+        function removeRecipe(id) {
+            recipeService.removeRecipe(id);
+        }
 
 
     }

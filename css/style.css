@@ -33,6 +33,10 @@ li.recIns {
     display: none;
 }
 
+.btn-remove {
+    width: 100%;
+}
+
 .rating {
      unicode-bidi: bidi-override;
      direction: rtl;
@@ -59,6 +63,7 @@ li.recIns {
 }
 #4star{
 
-}#5star{
+}
+#5star{
 
 }

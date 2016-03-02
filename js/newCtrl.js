@@ -18,7 +18,7 @@
             this.ingredients = [];
             this.instructions = [];
             this.category = '';
-            this.rating = [];
+            this.rating = {};
         };
         var defaultImage = 'img/Lets-get-cooking.png';
         nc.imageShow = defaultImage;
@@ -57,17 +57,13 @@
             newRecipe.category = nc.category;
             newRecipe.private = nc.privacy;
             newRecipe.userName = nc.userName;
-
+            newRecipe.rating = {placeholder: 0};
             for (var i = 0; i < nc.ingredients.length; i++) {
                 newRecipe.ingredients.push({ingredient: nc.ingredients[i].name, qty: nc.ingredients[i].qty});
             }
             for (i = 0; i < nc.instructions.length; i++) {
                 newRecipe.instructions.push({instruction: nc.instructions[i].name});
             }
-
-            var someNameObj = {};
-            someNameObj[recipeService.loggedin.user] = 5;
-            newRecipe.rating.push(someNameObj);
 
             addRecipe(newRecipe);
 
@@ -83,7 +79,6 @@
         function addRecipe(recipe) {
             nc.recipes.$add(recipe).then(function(ref){
                 var recipesId = ref.key();
-                console.log(recipesId);
                 recipeService.addtoCookBook(recipesId);
             });
         }

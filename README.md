@@ -1,2 +1,2 @@
-# ngBootSeed
-Angular Bootstrap Seed, with UI Router
+# Recipes
+Angular Capstone Project - a recipe website.
