@@ -15,7 +15,8 @@
             "myCookBookController",
             "ngStorage",
             "app.filters",
-            "editrecipeController"
+            "editrecipeController",
+            "infinite-scroll"
 
 
         ])

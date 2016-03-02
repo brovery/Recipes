@@ -1,45 +1,59 @@
 <div class="alert alert-info row">
-    <h2 ng-bind="rc.recipe.name" class="recipeTitle"></h2>
-
-    <div class="rating" >
-        <span ng-click="rc.star(rc.recipe.$id, 5)" id="5star">☆</span>
-        <span ng-click="rc.star(rc.recipe.$id, 4)" id="4star">☆</span>
-        <span ng-click="rc.star(rc.recipe.$id, 3)" id="3star">☆</span>
-        <span ng-click="rc.star(rc.recipe.$id, 2)" id="2star">☆</span>
-        <span ng-click="rc.star(rc.recipe.$id, 1)" id="1star">☆</span>
+    <div class="row">
+        <h2 ng-bind="rc.recipe.name" class="recipeTitle"></h2>
     </div>
 
-    <div class="col-sm-6 times">
-        Prep Time: <span ng-bind="rc.recipe.prepTime | times"></span><br>
-        Cook Time: <span ng-bind="rc.recipe.cookTime | times"></span>
-    </div>
-    <div class="col-sm-6">
-        <img width="100%" ng-src={{rc.recipe.image}} alt="Image of dish">
-    </div>
-    <div class="col-sm-12">
-        <hr>
-        <h3>Ingredients</h3>
-        <ul class="recIns">
-            <li ng-repeat="ingredient in rc.recipe.ingredients" class="recIns">
-                <span ng-bind="ingredient.ingredient"></span>
-                -
-                <span ng-bind="ingredient.qty"></span>
-            </li>
-        </ul>
-    </div>
-    <div class="col-sm-12">
-        <hr>
-        <h3>Instructions</h3>
-        <ol class="recIns">
-            <li ng-repeat="instruction in rc.recipe.instructions"  class="recIns">
-                <span ng-bind="instruction.instruction"></span>
-            </li>
-        </ol>
+    <div class="row">
+        <div class="col-sm-6">
+
+            <div class="col-sm-6 times">
+                Prep Time: <span ng-bind="rc.recipe.prepTime | times"></span><br>
+                Cook Time: <span ng-bind="rc.recipe.cookTime | times"></span>
+            </div>
+            <div class="col-sm-6 rating">
+                <span ng-click="rc.star(rc.recipe.$id, 5)" id="5star">☆</span>
+                <span ng-click="rc.star(rc.recipe.$id, 4)" id="4star">☆</span>
+                <span ng-click="rc.star(rc.recipe.$id, 3)" id="3star">☆</span>
+                <span ng-click="rc.star(rc.recipe.$id, 2)" id="2star">☆</span>
+                <span ng-click="rc.star(rc.recipe.$id, 1)" id="1star">☆</span>
+            </div>
+            <div class="col-sm-12">
+                <hr>
+                <h3>Ingredients</h3>
+                <ul class="recIns">
+                    <li ng-repeat="ingredient in rc.recipe.ingredients" class="recIns">
+                        <span ng-bind="ingredient.ingredient"></span>
+                        -
+                        <span ng-bind="ingredient.qty"></span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+
+        <div class="col-sm-6 img-container">
+            <img class="recipeImage" ng-src={{rc.recipe.image}} alt="Image of dish">
+        </div>
+
+        <div class="col-sm-12">
+            <hr>
+            <h3>Instructions</h3>
+            <ol class="recIns">
+                <li ng-repeat="instruction in rc.recipe.instructions" class="recIns">
+                    <span ng-bind="instruction.instruction"></span>
+                </li>
+            </ol>
+        </div>
     </div>
 
-    <a href="#/editRecipe">
-        <button class="btn btn-primary" ng-click="rc.editRecipe()">Edit this Recipe</button>
-    </a>
-    <button ng-show="rc.loggedin.loggedin" class="btn btn-primary" ng-click="rc.addtoCookBook(rc.recipe.$id)">Add to Cookbook</button>
+    <div class="row">
+        <a href="#/editRecipe">
+            <button class="btn btn-primary" ng-click="rc.editRecipe()">Edit this Recipe</button>
+        </a>
+        <button ng-show="rc.loggedin.loggedin" class="btn btn-primary" ng-click="rc.addtoCookBook(rc.recipe.$id)">Add to
+            Cookbook
+        </button>
+    </div>
 
 </div>
