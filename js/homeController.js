@@ -12,7 +12,6 @@
         var hc = this;
         hc.recipes = recipeService.recipes;
         hc.displayRecipes = hc.recipes.slice(0,4);
-        console.log(hc.displayRecipes);
         hc.getMoreRecipes = getMoreRecipes;
 
         // define functions

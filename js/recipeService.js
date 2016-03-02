@@ -23,10 +23,10 @@
         rs.login = login;
         rs.userindex = -1;
         rs.curRecipe = $localStorage['curRecipe'];
+        rs.addToCookBookButton = true;
         var key = "";
 
         // define functions
-
         function addRecipe(recipe) {
             rs.recipes.$add(recipe);
         }
@@ -55,6 +55,7 @@
             }
             if (!alreadyadded) {
                 rs.cookbook.$add({recipe: id});
+                rs.addToCookBookButton = false;
                 console.log("Added Recipe to your cookbook!");
             }
         }
@@ -106,6 +107,21 @@
             var cookbookurl = users + "/" + key + "/recipes";
             var mycookbook = new Firebase(cookbookurl);
             rs.cookbook = $firebaseArray(mycookbook);
+            checkCookBook();
+        }
+
+        function checkCookBook() {
+            var count = 0;
+            console.log(rs.curRecipe.$id);
+            $interval(function() {
+                if (rs.cookbook.length != 0) {
+                    for (var i = 0; i < rs.cookbook.length; i++) {
+                        if (rs.cookbook[i].recipe == rs.curRecipe.$id) {
+                            rs.addToCookBookButton = false;
+                        }
+                    }
+                }
+            }, 1000, 3);
         }
 
     }
