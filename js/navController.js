@@ -14,6 +14,7 @@
         nav.recipes = recipeService.recipes;
         nav.loggedin = recipeService.loggedin;
 
+
         function isActive(viewLocation) {
             return viewLocation === $location.path();
         }
