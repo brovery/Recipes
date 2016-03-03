@@ -14,7 +14,7 @@
         nav.recipes = recipeService.recipes;
         nav.loggedin = recipeService.loggedin;
         nav.showSearch = false;
-        nav.getthisdamnthingtowork = getthisdamnthingtowork;
+        nav.blurit = blurit;
 
 
         function isActive(viewLocation) {
@@ -30,11 +30,12 @@
             }
         }
 
-        function getthisdamnthingtowork() {
+        function blurit() {
             $timeout(function() {
                 nav.showSearch=false;
             }, 500);
         }
+
     }
 
 }());
