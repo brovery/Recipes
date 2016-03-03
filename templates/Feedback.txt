@@ -51,3 +51,7 @@ Feedback: The recipe site is great!  Some of the recipes look really good too, l
 #10
 From: David O'Very
 Feedback: I would like to see something that allows me to "pin" specific recipes so I can sort by those I want to see and those I don't. It allows you to edit, but a comment section that allows people to add things they have tried or something along those lines.
+
+#11
+From: Karen Graff
+Feedback: It would be nice to add ingredients and instructions without having to push the button everytime. Change "user" to "account". Add possibility to upload a recipe. Move ingredients next to picture, not below it.
