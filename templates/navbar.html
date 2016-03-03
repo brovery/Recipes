@@ -29,13 +29,18 @@
             <div class="col-sm-4">
                 <div id="imaginary_container">
                     <div class="input-group stylish-input-group">
-                        <input type="search" class="form-control" placeholder="Search Ingredient" ng-model="search.ingredients.ingredient">
+                        <input type="text" class="form-control" ng-focus="showSearch=true" ng-blur="showSearch=false"
+                               placeholder="Search Ingredient" ng-model="search.ingredients.ingredient">
                     </div>
-                    <ul ng-show="search">
-                        <li ng-repeat="recipe in nav.recipes | filter:search">
-                            {{recipe.name}}
-                        </li>
-                    </ul>
+                    <ul ng-show="showSearch">
+                        <div ng-repeat="recipe in nav.recipes | filter:search | limitTo : 10">
+                            <a href="#/{{recipe.$id}}">
+                                <li>
+                                    {{recipe.name}}
+                                </li>
+                            </a>
+                        </div>
+
                     </ul>
                 </div>
             </div>
@@ -74,7 +79,8 @@
 </nav>
 
 <!-- Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" data-backdrop="true">
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+     data-backdrop="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

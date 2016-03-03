@@ -143,7 +143,6 @@
                 }
             }).then(function(){
                 rs.rateTotal.rating = total.toPrecision(1);
-                console.log(rs.rateTotal);
             });
 
         }
