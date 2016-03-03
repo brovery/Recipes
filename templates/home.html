@@ -14,7 +14,8 @@
             <div ng-repeat="recipe in hc.displayRecipes | filter:{private: false}">
                 <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                     <a href="#/{{recipe.$id}}">
-                        <h4><span ng-bind="recipe.name"></span></h4>
+                        <h4><span ng-bind="recipe.name"></span></h4><br>
+                        <h4><span ng-init="hc.getRating(recipe.$id)"></span></h4>
                         <img class="img-responsive thumbnail" ng-src={{recipe.image}} alt="Image of Dish">
                     </a>
                 </div>
