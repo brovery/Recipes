@@ -114,7 +114,7 @@
 
         function checkCookBook() {
             var count = 0;
-            console.log(rs.curRecipe.$id);
+            //console.log(rs.curRecipe.$id);
             $interval(function() {
                 if (rs.cookbook.length != 0) {
                     for (var i = 0; i < rs.cookbook.length; i++) {
