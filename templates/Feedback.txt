@@ -47,3 +47,7 @@ Feedback: Looks great! Need to put in catagory so it can be looked up easier. An
 #9
 From: Christine King
 Feedback: The recipe site is great!  Some of the recipes look really good too, like the Grilled Teriyaki Chicken.  Though I’m not so sure about the Zippy Jelly Sandwich.
+
+#10
+From: David O'Very
+Feedback: I would like to see something that allows me to "pin" specific recipes so I can sort by those I want to see and those I don't. It allows you to edit, but a comment section that allows people to add things they have tried or something along those lines.
