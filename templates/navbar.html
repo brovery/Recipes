@@ -29,10 +29,10 @@
             <div class="col-sm-4">
                 <div id="imaginary_container">
                     <div class="input-group stylish-input-group">
-                        <input type="text" class="form-control" placeholder="Search" ng-model="search.name">
+                        <input type="search" class="form-control" placeholder="Search Ingredient" ng-model="search.ingredients.ingredient">
                     </div>
                     <ul ng-show="search">
-                        <li ng-repeat="recipe in nav.recipes | query">
+                        <li ng-repeat="recipe in nav.recipes | filter:search">
                             {{recipe.name}}
                         </li>
                     </ul>
@@ -72,3 +72,25 @@
         </div>
     </div>
 </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" data-backdrop="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Oops</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    Enter valid email and password
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
