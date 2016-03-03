@@ -4,9 +4,9 @@
     angular.module('recipeController', [])
         .controller('recipeController', recipeController);
 
-    recipeController.$inject = ['recipeService', 'recipe', '$firebaseArray', '$localStorage', '$interval'];
+    recipeController.$inject = ['recipeService', 'recipe', '$firebaseArray', '$localStorage', '$interval', '$scope'];
 
-    function recipeController(recipeService, recipe, $firebaseArray, $localStorage, $interval) {
+    function recipeController(recipeService, recipe, $firebaseArray, $localStorage, $interval, $scope) {
         // list everything
         var rc = this;
         var num = 0;
@@ -19,6 +19,8 @@
         rc.editRecipe = editRecipe;
         rc.star = star;
         rc.getRating = getRating;
+
+        console.log($scope);
 
 
         if (rc.recipe == undefined) {
