@@ -123,6 +123,7 @@
                     //console.log(error + authData);
                     if (error) {
                         console.log(error);
+                        $('#loginModal').modal('show');
                         var wrong = "Bad username or Password";
                     } else {
                         lc.loginHide = true;
@@ -171,6 +172,7 @@
                         console.log("Email changed successfully");
                         lc.successHide = true;
                         lc.failHide = false;
+                        lc.emailFail = false;
 
                     } else {
                         console.log("Error changing email:", error);
@@ -194,6 +196,7 @@
                         console.log("Password changed successfully");
                         lc.successHide = true;
                         lc.failHide = false;
+                        lc.passFail = false;
                     } else {
                         console.log("Error changing password:", error);
                         lc.failHide = true;

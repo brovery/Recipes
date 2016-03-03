@@ -15,10 +15,12 @@
         var rs = this;
         rs.recipes = $firebaseArray(reciperef);
         rs.users = $firebaseArray(users);
+        rs.rateTotal = {rating: 0};
         rs.addRecipe = addRecipe;
         rs.addtoCookBook = addtoCookBook;
         rs.initRecipe = initRecipe;
         rs.removeRecipe = removeRecipe;
+        rs.getRating = getRating;
         rs.loggedin = {loggedin: false};
         rs.login = login;
         rs.userindex = -1;
@@ -98,7 +100,7 @@
             }, 1000, 3);
 
             if (count == 3) {
-                alert("Unable to connect to database. Please try again later.")
+                alert("Unable to connect to database. Please try again later.");
             }
         }
 
@@ -122,6 +124,28 @@
                     }
                 }
             }, 1000, 3);
+        }
+
+        function getRating(key){
+            var rating = new Firebase(reciperef + '/' + key + '/rating');
+            var rate = $firebaseArray(rating);
+            var total = 0;
+
+            rate.$loaded(function() {
+                var len = rate.length - 1;
+                if (len !== 0) {
+                    for (var i = 0; i < len; i++) {
+                        total += rate[i].rating;
+                    }
+                    total /= len;
+                }else{
+                    total = 0;
+                }
+            }).then(function(){
+                rs.rateTotal.rating = total.toPrecision(1);
+                console.log(rs.rateTotal);
+            });
+
         }
 
     }

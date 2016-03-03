@@ -4,11 +4,12 @@
     angular.module('recipeController', [])
         .controller('recipeController', recipeController);
 
-    recipeController.$inject = ['recipeService', 'recipe', '$firebaseArray', '$localStorage'];
+    recipeController.$inject = ['recipeService', 'recipe', '$firebaseArray', '$localStorage', '$interval'];
 
-    function recipeController(recipeService, recipe, $firebaseArray, $localStorage) {
+    function recipeController(recipeService, recipe, $firebaseArray, $localStorage, $interval) {
         // list everything
         var rc = this;
+        var num = 0;
         rc.recipes = recipeService.recipes;
         rc.recipe = recipe;
         rc.loggedin = recipeService.loggedin;
@@ -17,6 +18,8 @@
         rc.addtoCookBook = addtoCookBook;
         rc.editRecipe = editRecipe;
         rc.star = star;
+        rc.getRating = getRating;
+
 
         if (rc.recipe == undefined) {
             rc.recipe = $localStorage.curRecipe;
@@ -51,12 +54,28 @@
             fireRate.$loaded(function () {
                 for (i = 0; i < fireRate.length; i++) {
                     if (user === fireRate[i].user) {
-                        console.log(fireRate[i].user);
                         fireRate.$remove(fireRate[i]);
                     }
                 }
                 fireRate.$add(newRate);
             });
+
+
+        }
+
+        function getRating(key) {
+            $interval(function () {
+                recipeService.getRating(key);
+                rc.rating = recipeService.rateTotal;
+
+            }, 800, 3).then(function () {
+                for (var i = 1; i <= rc.rating.rating; i++) {
+                    var starId = '#' + i + 'star';
+                    $(starId).html("&#x2605");
+                    $(starId).css("color", "blue");
+                }
+            });
+
 
         }
 
