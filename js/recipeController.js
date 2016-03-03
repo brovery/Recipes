@@ -68,7 +68,14 @@
                 recipeService.getRating(key);
                 rc.rating = recipeService.rateTotal;
 
-            }, 1000, 3);
+            }, 800, 3).then(function () {
+                for (var i = 1; i <= rc.rating.rating; i++) {
+                    var starId = '#' + i + 'star';
+                    $(starId).html("&#x2605");
+                    $(starId).css("color", "blue");
+                }
+            });
+
 
         }
 
