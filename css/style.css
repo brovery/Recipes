@@ -69,8 +69,8 @@ li.recIns {
 }
 
 .recipeImage {
-    width: 100%;
-    vertical-align: middle;
+    width: auto;
+
 }
 
 .img-container {
