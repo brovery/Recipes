@@ -59,7 +59,7 @@
                 }
                 fireRate.$add(newRate);
             });
-
+            getRating(id);
 
         }
 
@@ -69,9 +69,14 @@
                 rc.rating = recipeService.rateTotal;
 
             }, 800, 3).then(function () {
+                for (var i = 1; i <= 5; i++) {
+                    var starId = '#' + i + 'star';
+                    $(starId).html('<i class="fa fa-star-o"></i>');
+                    $(starId).css("color", "black");
+                }
                 for (var i = 1; i <= rc.rating.rating; i++) {
                     var starId = '#' + i + 'star';
-                    $(starId).html("&#x2605");
+                    $(starId).html('<i class="fa fa-star"></i>');
                     $(starId).css("color", "blue");
                 }
             });
