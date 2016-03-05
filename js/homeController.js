@@ -37,9 +37,8 @@
                     $(starId).css("color", "blue");
                 }
             });
-
-
         }
+
 
 
 

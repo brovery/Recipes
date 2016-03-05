@@ -4,9 +4,9 @@
     angular.module('recipeController', [])
         .controller('recipeController', recipeController);
 
-    recipeController.$inject = ['recipeService', 'recipe', '$firebaseArray', '$localStorage', '$interval', '$scope'];
+    recipeController.$inject = ['recipeService', 'recipe', '$firebaseArray', '$localStorage', '$interval'];
 
-    function recipeController(recipeService, recipe, $firebaseArray, $localStorage, $interval, $scope) {
+    function recipeController(recipeService, recipe, $firebaseArray, $localStorage, $interval) {
         // list everything
         var rc = this;
         var num = 0;
@@ -20,8 +20,7 @@
         rc.star = star;
         rc.getRating = getRating;
 
-        console.log($scope);
-
+        console.log(rc.addToCookBookButton);
 
         if (rc.recipe == undefined) {
             rc.recipe = $localStorage.curRecipe;
@@ -33,6 +32,7 @@
         }
 
         function addtoCookBook(id) {
+            console.log(rc.addToCookBookButton);
             recipeService.addtoCookBook(id);
             $('.add-button').css("display", "none");
         }

@@ -54,11 +54,10 @@
 
     <div class="row">
         <a href="#/editRecipe">
-            <button class="btn btn-primary" ng-click="rc.editRecipe()">Edit this Recipe</button>
+            <button ng-show="rc.loggedin.loggedin" class="btn btn-primary" ng-click="rc.editRecipe()">Edit this Recipe</button>
         </a>
-        <button ng-show="rc.loggedin.loggedin" ng-hide="rc.addToCookBookButton" class="btn btn-primary add-button"
-                ng-click="rc.addtoCookBook(rc.recipe.$id)">Add to
-            Cookbook
+        <button ng-show="rc.loggedin.loggedin" class="btn btn-primary add-button"
+                ng-click="rc.addtoCookBook(rc.recipe.$id)">Add to Cookbook
         </button>
     </div>
 

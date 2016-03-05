@@ -4,9 +4,9 @@
     angular.module('recipeService', [])
         .service('recipeService', recipeService);
 
-    recipeService.$inject = ['$firebaseArray', '$interval', "$localStorage"];
+    recipeService.$inject = ['$firebaseArray', "$localStorage"];
 
-    function recipeService($firebaseArray, $interval, $localStorage) {
+    function recipeService($firebaseArray, $localStorage) {
         var url = 'https://geo-recipes.firebaseio.com';
         var reciperef = new Firebase(url + "/Recipes");
         var users = new Firebase(url + "/Users");
@@ -25,7 +25,8 @@
         rs.login = login;
         rs.userindex = -1;
         rs.curRecipe = $localStorage['curRecipe'];
-        rs.addToCookBookButton = true;
+        rs.addToCookBookButton = {show: true};
+        rs.checkCookBook = checkCookBook;
         var key = "";
 
         // define functions
@@ -38,14 +39,6 @@
         }
 
         function addtoCookBook(id) {
-            // Add the user to the recipe.
-            //for (var i = 0; i<rs.recipes.length; i++) {
-            //    if (rs.recipes[i].$id == id) {
-            //        var user = rs.loggedin.user;
-            //        rs.recipes[i].users[user] = true;
-            //        rs.recipes.$save(i);
-            //    }
-            //}
 
             // Add the recipe to the user.
             var alreadyadded = false;
@@ -57,7 +50,7 @@
             }
             if (!alreadyadded) {
                 rs.cookbook.$add({recipe: id});
-                rs.addToCookBookButton = false;
+                rs.addToCookBookButton.show = false;
                 console.log("Added Recipe to your cookbook!");
             }
         }
@@ -73,35 +66,27 @@
         }
 
         function login() {
-            var priorlogin = false, count = 0;
+            var priorlogin = false;
 
-            $interval(function() {
-                if (rs.users.length == 0) {
-                    count++;
-                } else {
-                    for (var i = 0; i < rs.users.length; i++) {
-                        if (rs.users[i].user == rs.loggedin.user) {
-                            priorlogin = true;
-                            rs.userindex = i;
-                            key = rs.users[i].$id;
-                        }
-                    }
-
-                    if (!priorlogin) {
-                        rs.users.$add({user: rs.loggedin.user}).then(function(ref) {
-                            key = ref.key();
-                            firebook();
-                        });
-                        rs.userindex = rs.users.length;
-                    } else {
-                        firebook();
+            rs.users.$loaded(function() {
+                for (var i = 0; i < rs.users.length; i++) {
+                    if (rs.users[i].user == rs.loggedin.user) {
+                        priorlogin = true;
+                        rs.userindex = i;
+                        key = rs.users[i].$id;
                     }
                 }
-            }, 1000, 3);
+                if (!priorlogin) {
+                    rs.users.$add({user: rs.loggedin.user}).then(function(ref) {
+                        key = ref.key();
+                        firebook();
+                    });
+                    rs.userindex = rs.users.length;
+                } else {
+                    firebook();
+                }
 
-            if (count == 3) {
-                alert("Unable to connect to database. Please try again later.");
-            }
+            });
         }
 
         function firebook() {
@@ -113,17 +98,19 @@
         }
 
         function checkCookBook() {
-            var count = 0;
-            console.log(rs.curRecipe.$id);
-            $interval(function() {
-                if (rs.cookbook.length != 0) {
-                    for (var i = 0; i < rs.cookbook.length; i++) {
-                        if (rs.cookbook[i].recipe == rs.curRecipe.$id) {
-                            rs.addToCookBookButton = false;
-                        }
+            if (rs.loggedin.loggedin == false) return;
+
+            rs.addToCookBookButton.show = false;
+
+            rs.cookbook.$loaded(function() {
+                for (var i = 0; i < rs.cookbook.length; i++) {
+
+                    if (rs.cookbook[i].recipe == rs.curRecipe.$id) {
+                        console.log("button = true");
+                        rs.addToCookBookButton.show = true;
                     }
                 }
-            }, 1000, 3);
+            });
         }
 
         function getRating(key){
