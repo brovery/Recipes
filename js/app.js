@@ -65,6 +65,7 @@
                                 for (var i = 0; i < recipeService.recipes.length; i++) {
                                     if (recipeService.recipes[i].$id == $stateParams.id) {
                                         $localStorage.curRecipe = recipeService.recipes[i];
+                                        recipeService.checkCookBook();
                                         return recipeService.recipes[i];
                                     }
                                 }

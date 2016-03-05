@@ -22,6 +22,11 @@
             recipeService.recipes.$add(ec.curRecipe).then(function(ref) {
                 ec.key = ref.key();
                 recipeService.addtoCookBook(ec.key);
+                ec.curRecipe.name = "";
+                ec.curRecipe.prepTime = 0;
+                ec.curRecipe.cookTime = 0;
+                ec.curRecipe.ingredients = [];
+                ec.curRecipe.instructions = [];
             });
         }
 
